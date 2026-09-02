@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Zheyu Zhuang / 庄哲宇"
 title_separator          : "-"
 name                     : &name "Zheyu Zhuang"
-description              : &description "personal description"
+description              : &description "Robotics researcher developing robust visuomotor learning systems for real-world manipulation."
 url                      : https://zheyu-zhuang.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "Zheyu-Zhuang/zheyu-zhuang.github.io"
@@ -62,7 +62,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Open Graph/Twitter default site image
+og_image                 : og.png
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -73,7 +73,9 @@ social:
 
 # Analytics
 analytics:
-  provider               :  "google-universal" # false (default), "google", "google-universal", "custom"
+  provider               :  false # false (default), "google", "google-universal", "custom"
+  # Was "google-universal" with an empty tracking_id, which emitted ga('create', '')
+  # against Universal Analytics (shut down July 2023). Set up GA4 separately if wanted.
   google:
     tracking_id          :
 
@@ -82,12 +84,12 @@ analytics:
 author:
   name             : "Zheyu Zhuang"
   avatar           : "profile.png"
-  bio              : "🤖 Creating Robots that see, do and collaborate."
-  location         : "Canberra, Australia"
+  bio              : "Robots that see, adapt, and act in the real world."
+  location         : "Stockholm, Sweden"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?hl=en&user=zHFrndgAAAAJ"
-  email            : "zheyu.zhuang@anu.edu.au"
+  email            : "roboticist.zheyu@gmail.com"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -136,9 +138,6 @@ exclude:
   - LICENSE
   - README
   - Rakefile
-  - assets/js/_main.js
-  - assets/js/plugins
-  - assets/js/vendor
   - config
   - gulpfile.js
   - log
@@ -255,7 +254,7 @@ sass:
 permalink: /:categories/:title/
 # paginate: 5 # amount of posts to show
 # paginate_path: /page:num/
-timezone: America/Los_Angeles # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Europe/Stockholm
 
 
 # Plugins
