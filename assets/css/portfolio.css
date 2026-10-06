@@ -320,12 +320,18 @@ a { color: inherit; }
 }
 .hero-actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); }
 .hero-actions a { text-decoration: none; }
-.hero-contact { margin: var(--space-3) 0 0; }
-.hero-email { color: var(--accent); font-size: var(--fs-small); font-weight: var(--fw-semi); text-decoration: none; }
-.hero-email:hover { text-decoration: underline; text-underline-offset: 3px; }
-.hero-profiles { display: flex; gap: var(--space-4); }
-.hero-profiles a { padding: var(--space-2) 0; color: var(--muted); font-size: var(--fs-small); font-weight: var(--fw-semi); }
-.hero-actions a:not(.button):hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.hero-contact {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-5); padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.hero-contact-main { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); }
+.hero-contact-label { color: var(--muted); font-size: var(--fs-label); font-weight: var(--fw-bold); letter-spacing: var(--ls-caps); text-transform: uppercase; }
+.hero-email { color: var(--accent); font-size: var(--fs-small); font-weight: var(--fw-semi); text-decoration: none; overflow-wrap: anywhere; }
+.hero-profiles { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.hero-profiles a { color: var(--muted); font-size: var(--fs-small); font-weight: var(--fw-semi); text-decoration: none; }
+.hero-email:hover, .hero-profiles a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
 .button {
   display: inline-flex; align-items: center; gap: var(--space-3);
@@ -675,6 +681,7 @@ a { color: inherit; }
      its own, and so the photo starts higher alongside it. */
   .eyebrow { margin-bottom: var(--space-4); }
   .hero-actions { align-items: flex-start; }
+  .hero-contact-main { display: grid; gap: var(--space-1); }
   .hero-profiles { width: 100%; }
   .hero-portrait { width: clamp(88px, 27vw, 116px); margin-left: var(--space-4); }
   .signal-strip { gap: var(--space-3); white-space: nowrap; }
