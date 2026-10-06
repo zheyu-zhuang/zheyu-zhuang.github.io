@@ -75,9 +75,9 @@
     <main id="main">
       <nav class="signal-strip" aria-label="Page sections">
         <div class="signal-links">
-          <a href="#practice">Skills</a>
-          <a href="#work">Work</a>
           <a href="#about">About</a>
+          <a href="#expertise">Skills</a>
+          <a href="#work">Research</a>
           <a href="#publications">Papers</a>
         </div>
         <button class="theme-toggle" type="button" aria-pressed="false">
@@ -115,35 +115,29 @@
         </div>
       </section>
 
-      <section class="section section--dark skills-section" id="practice">
+      <section class="section section--tint about-section" id="about">
         <div class="section-head">
-          <p class="section-index">01 / Skills</p>
+          <p class="section-index">01 / About</p>
           <div>
-            <h2>What I build.</h2>
-            <p class="section-lede">Three connected capabilities, developed through research and tested on physical robots.</p>
+            <h2>From policy learning to real robots.</h2>
+            <p class="section-lede">I am a postdoctoral researcher in Robotics, Perception and Learning at KTH, working with Professor Danica Kragic. I earned my PhD in Robotics at the Australian National University with Professor Robert Mahony.</p>
           </div>
         </div>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <span class="skill-number">01</span>
+        <div class="capabilities" id="expertise" aria-label="Core skills">
+          <article class="capability">
             <h3>Robot learning</h3>
-            <p>Train policies from limited demonstrations and evaluate whether they transfer beyond the training setup.</p>
-            <div class="skill-tags"><span>Imitation learning</span><span>Policy evaluation</span><span>VLA fine-tuning</span></div>
-            <p class="skill-proof">In practice: <a href="#seeker">Seeker</a> and <a href="#focuspool">FocusPool</a></p>
+            <p>Policies from limited demonstrations, tested for transfer.</p>
+            <p class="capability-proof"><a href="#seeker">Seeker</a> and <a href="#focuspool">FocusPool</a></p>
           </article>
-          <article class="skill-card">
-            <span class="skill-number">02</span>
+          <article class="capability">
             <h3>Perception for action</h3>
-            <p>Connect visual features with task and robot state so policies attend to what matters for control.</p>
-            <div class="skill-tags"><span>RGB &amp; depth</span><span>Point clouds</span><span>Proprioception</span></div>
-            <p class="skill-proof">In practice: <a href="#palm">PALM</a> and <a href="#robot-centric-pooling">Robot-centric Pooling</a></p>
+            <p>Visual features grounded in tasks and robot state.</p>
+            <p class="capability-proof"><a href="#palm">PALM</a> and <a href="#robot-centric-pooling">Robot-centric Pooling</a></p>
           </article>
-          <article class="skill-card">
-            <span class="skill-number">03</span>
-            <h3>Complete robot systems</h3>
-            <p>Integrate sensing, calibration, ROS and real-time control, then deploy and diagnose the full system.</p>
-            <div class="skill-tags"><span>ROS</span><span>Sensor integration</span><span>Deployment</span></div>
-            <p class="skill-proof">In practice: <a href="#goferbot">GoferBot</a> and <a href="#cartman">Cartman</a></p>
+          <article class="capability">
+            <h3>Robot systems</h3>
+            <p>Sensing, control and deployment on physical hardware.</p>
+            <p class="capability-proof"><a href="#goferbot">GoferBot</a> and <a href="#cartman">Cartman</a></p>
           </article>
         </div>
       </section>
@@ -152,8 +146,8 @@
         <div class="section-head">
           <p class="section-index">02 / Research</p>
           <div>
-            <h2>Selected research.</h2>
-            <p class="section-lede">Learning useful visual representations from actions and building policies that generalise across real-world changes.</p>
+            <h2>Research that learns what matters for action.</h2>
+            <p class="section-lede">Recent papers develop action-grounded perception for robust, data-efficient manipulation.</p>
           </div>
         </div>
         <div class="projects">
@@ -340,22 +334,12 @@
         </div>
       </dialog>
 
-      <section class="section section--tint about-section" id="about">
-        <div class="section-head">
-          <p class="section-index">03 / About</p>
-          <div>
-            <h2>Research grounded in real robots.</h2>
-            <p class="section-lede">I am a postdoctoral researcher in Robotics, Perception and Learning at KTH, working with Professor Danica Kragic. I earned my PhD in Robotics at the Australian National University with Professor Robert Mahony. My work connects data-efficient learning with real-robot deployment.</p>
-          </div>
-        </div>
-      </section>
-
       <section class="section origins-section" aria-labelledby="systems-heading">
         <div class="section-head">
-          <p class="section-index">04 / Systems</p>
+          <p class="section-index">03 / Systems</p>
           <div>
-            <h2 id="systems-heading">Two examples of complete robotic systems.</h2>
-            <p class="section-lede">Each brought perception, control, software and hardware together around a different robotics problem.</p>
+            <h2 id="systems-heading">Beyond policies: complete robot systems.</h2>
+            <p class="section-lede">Earlier systems work brought the same perception-and-control focus to deployed robots.</p>
           </div>
         </div>
         <div class="systems-stories">
@@ -391,7 +375,7 @@
 
       <section class="section section--tint evidence-section" aria-labelledby="beyond-heading">
         <div class="section-head">
-          <p class="section-index">05 / Mentoring</p>
+          <p class="section-index">04 / Mentoring</p>
           <div>
             <h2 id="beyond-heading">Supporting research beyond my own work.</h2>
             <p class="section-lede">I contribute through mentoring, teaching, editorial work and peer review.</p>
@@ -418,7 +402,7 @@
 
       <section class="section publications-section" id="publications">
         <div class="section-head">
-          <p class="section-index">06 / Publications</p>
+          <p class="section-index">05 / Publications</p>
           <div>
             <h2>Selected publications across robot learning, perception and control.</h2>
             <p class="section-lede">Recent work focuses on data-efficient visuomotor learning; earlier papers span closed-loop control, 3D perception, human–robot collaboration and integrated manipulation systems.</p>
@@ -492,7 +476,7 @@
 
       <section class="section section--tint hobbies-section" aria-labelledby="hobbies-heading">
         <div class="section-head">
-          <p class="section-index">07 / Off the clock</p>
+          <p class="section-index">06 / Off the clock</p>
           <div>
             <h2 id="hobbies-heading">When I'm not chasing robots around a lab.</h2>
             <p class="section-lede">A few things that get me outside and away from a screen.</p>
@@ -556,11 +540,11 @@
       if (clock) clock.textContent = '· ' + new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date());
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealItems = document.querySelectorAll('.section-head, .project, .skill-card, .research-archive-item, .evidence-list article, .system-story, .publication, .hobby-card');
+      const revealItems = document.querySelectorAll('.section-head, .project, .capability, .research-archive-item, .evidence-list article, .system-story, .publication, .hobby-card');
       if (!reducedMotion && 'IntersectionObserver' in window) {
         revealItems.forEach((item, index) => {
           item.classList.add('reveal');
-          if (item.matches('.skill-card') && index % 2) item.classList.add('reveal-delay');
+          if (item.matches('.capability') && index % 2) item.classList.add('reveal-delay');
         });
         const revealObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
@@ -579,7 +563,7 @@
       const updateSectionLink = () => {
         const marker = window.scrollY + window.innerHeight * .32;
         const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-        // Seeded with null so the hero reads as no section rather than highlighting Skills.
+        // Seeded with null so the hero reads as no section rather than highlighting About.
         const active = atPageEnd ? observedSections[observedSections.length - 1] : observedSections.reduce((current, section) => section.offsetTop <= marker ? section : current, null);
         sectionLinks.forEach(link => {
           // aria-current needs a real value: an empty string counts as false to a screen reader.

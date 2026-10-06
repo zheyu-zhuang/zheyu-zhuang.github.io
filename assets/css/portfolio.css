@@ -23,9 +23,7 @@
   --accent-soft: #e9eff7;   /* hover wash                                  */
   --on-accent:   #fdfcfa;   /* text on accent fills                        */
 
-  /* Inverted block - the Skills section. In light mode it drops to near
-     black; in dark mode it lifts to a raised surface instead, because there
-     is nothing left to invert to.                                         */
+  /* Inverted surfaces and utility links. */
   --invert-bg:      #24221e;
   --invert-fg:      #f6f3ee;
   --invert-fg-soft: #c3bdb2;
@@ -247,7 +245,7 @@ a { color: inherit; }
 .skip-link:focus { top: var(--space-4); }
 
 /* Shared uppercase micro-label. One size, one weight, one tracking. */
-.eyebrow, .section-index, .project-meta, .skill-number,
+.eyebrow, .section-index, .project-meta,
 .system-story-meta, .evidence-list article > span, .hero-facts dt {
   font-size: var(--fs-label);
   font-weight: var(--fw-bold);
@@ -368,8 +366,7 @@ a { color: inherit; }
 /* ---------------------------------------------------------------------------
    Section system
    Every section: a --rail index column + heading block, then a full-width body.
-   Blocks alternate page / tint down the page; Skills takes the dark
-   treatment in its tinted slot. Tone alone separates them, so no rules.
+   Blocks use page and tint tones so the content reads as one sequence.
 
    Full-bleed sections add --pad-x on top of the centring calc so their text
    lands on exactly the same left and right edges as the contained sections.
@@ -402,13 +399,17 @@ a { color: inherit; }
 .about-section { padding-block: var(--space-7); }
 .about-section .section-head { margin-bottom: 0; }
 [id]:is(.project, .research-archive-item, .system-story) { scroll-margin-top: calc(var(--nav-h) + var(--space-4)); }
-
-.about-columns {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4) var(--gutter);
-  color: var(--ink-soft);
+.capabilities {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6);
+  margin-top: var(--space-6); padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
 }
-.about-columns p { margin: 0; }
+.capability h3 { margin: 0 0 var(--space-2); font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
+.capability p { margin: 0; color: var(--muted); font-size: var(--fs-body-s); line-height: var(--lh-normal); }
+.capability .capability-proof { margin-top: var(--space-3); }
+.capability-proof a { color: var(--accent); font-weight: var(--fw-semi); text-decoration: none; }
+.capability-proof a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------------------------------------------------------------------------
    Research projects
@@ -550,23 +551,6 @@ a { color: inherit; }
 .research-archive-links button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ---------------------------------------------------------------------------
-   Skills (dark)
-   --------------------------------------------------------------------------- */
-.skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-7) var(--space-6); }
-.skill-number { color: var(--invert-accent); }
-.skill-card h3 { margin: var(--space-3) 0 var(--space-2); font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
-.skill-card p { margin: 0; color: var(--invert-fg-soft); font-size: var(--fs-body-s); line-height: var(--lh-relaxed); }
-.skill-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-4); }
-.skill-tags span {
-  padding: var(--space-1) var(--space-2); border-radius: var(--r-sm);
-  background: var(--invert-line); color: var(--invert-fg-soft);
-  font-size: var(--fs-micro); line-height: var(--lh-normal);
-}
-.skill-card .skill-proof { margin-top: var(--space-4); }
-.skill-proof a { color: var(--invert-accent); font-weight: var(--fw-semi); text-decoration: none; }
-.skill-proof a:hover { text-decoration: underline; text-underline-offset: 3px; }
-
-/* ---------------------------------------------------------------------------
    Systems
    --------------------------------------------------------------------------- */
 .systems-stories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); }
@@ -688,9 +672,9 @@ a { color: inherit; }
   /* Keeps the rule above the facts from ever running under the photo. */
   .hero-facts { clear: right; }
   .section-head { grid-template-columns: 1fr; gap: var(--space-4); align-items: start; }
-  .about-columns { grid-template-columns: 1fr; }
+  .capabilities { grid-template-columns: 1fr; gap: var(--space-4); }
+  .capability + .capability { padding-top: var(--space-4); border-top: 1px solid var(--line); }
   .project { grid-template-columns: minmax(240px, 280px) minmax(0, 1fr); column-gap: var(--space-5); }
-  .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
   .evidence-list article { grid-template-columns: 1fr; gap: var(--space-1); }
   .evidence-list article > span { grid-row: auto; margin-top: 0; }
   .hobbies-grid { grid-template-columns: 1fr; gap: var(--space-5); }
@@ -724,7 +708,6 @@ a { color: inherit; }
   .project-media { width: 100%; max-width: none; }
   .project-title-row { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
   .research-archive-grid { grid-template-columns: 1fr; gap: var(--space-2); }
-  .skills-grid { grid-template-columns: 1fr; }
   .systems-stories { grid-template-columns: 1fr; gap: var(--space-6); }
   .site-footer { grid-template-columns: 1fr auto; }
   .site-footer p:nth-child(2) { display: none; }
