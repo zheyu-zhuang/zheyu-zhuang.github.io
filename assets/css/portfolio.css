@@ -391,18 +391,19 @@ a { color: inherit; }
 }
 .section--dark .section-lede { color: var(--invert-fg-soft); }
 .expertise-section { padding-block: var(--space-5) var(--space-6); }
-.expertise-section .section-head { margin-bottom: var(--space-3); }
+.expertise-section .section-head { margin-bottom: var(--space-6); }
 [id]:is(.project, .research-archive-item, .system-story) { scroll-margin-top: calc(var(--nav-h) + var(--space-4)); }
-.capabilities {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--line);
+.skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-6); }
+.skill-card { padding-top: var(--space-4); border-top: 1px solid var(--line); }
+.skill-number { color: var(--accent); font-size: var(--fs-small); font-weight: var(--fw-semi); }
+.skill-card h3 { margin: var(--space-2) 0; font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
+.skill-card p { margin: 0; color: var(--ink-soft); font-size: var(--fs-body-s); line-height: var(--lh-relaxed); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-4); }
+.skill-tags span {
+  padding: var(--space-1) var(--space-2); border: 1px solid var(--line); border-radius: var(--r-sm);
+  background: var(--page); color: var(--muted);
+  font-size: var(--fs-micro); line-height: var(--lh-normal);
 }
-.capability h3 { margin: 0 0 var(--space-2); font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
-.capability p { margin: 0; color: var(--muted); font-size: var(--fs-body-s); line-height: var(--lh-normal); }
-.capability .capability-proof { margin-top: var(--space-3); }
-.capability-proof a { color: var(--accent); font-weight: var(--fw-semi); text-decoration: none; }
-.capability-proof a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------------------------------------------------------------------------
    Research projects
@@ -664,8 +665,7 @@ a { color: inherit; }
   }
   .hero-actions { clear: right; }
   .section-head { grid-template-columns: 1fr; gap: var(--space-4); align-items: start; }
-  .capabilities { grid-template-columns: 1fr; gap: var(--space-4); }
-  .capability + .capability { padding-top: var(--space-4); border-top: 1px solid var(--line); }
+  .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .project { grid-template-columns: minmax(240px, 280px) minmax(0, 1fr); column-gap: var(--space-5); }
   .evidence-list article { grid-template-columns: 1fr; gap: var(--space-1); }
   .evidence-list article > span { grid-row: auto; margin-top: 0; }
@@ -698,6 +698,7 @@ a { color: inherit; }
   .project-media { width: 100%; max-width: none; }
   .project-title-row { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
   .research-archive-grid { grid-template-columns: 1fr; gap: var(--space-2); }
+  .skills-grid { grid-template-columns: 1fr; }
   .systems-stories { grid-template-columns: 1fr; gap: var(--space-6); }
   .site-footer { grid-template-columns: 1fr auto; }
   .site-footer p:nth-child(2) { display: none; }

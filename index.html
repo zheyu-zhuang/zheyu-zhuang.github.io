@@ -119,24 +119,34 @@
         <div class="section-head">
           <p class="section-index">01 / Skills</p>
           <div>
-            <h2>What I bring to the work.</h2>
+            <h2>A systems approach to robot learning.</h2>
+            <p class="section-lede">I build robot-learning pipelines end to end, from data collection and ROS-based sensor integration to algorithm design, evaluation and deployment on physical systems.</p>
           </div>
         </div>
-        <div class="capabilities" aria-label="Core skills">
-          <article class="capability">
+        <div class="skills-grid">
+          <article class="skill-card">
+            <span class="skill-number">01</span>
+            <h3>Robotics systems</h3>
+            <p>Integrating hardware and software through ROS, with multi-sensor synchronisation, communication, calibration, control and real-time execution.</p>
+            <div class="skill-tags"><span>ROS</span><span>Sensor synchronisation</span><span>System integration</span><span>Real-time control</span></div>
+          </article>
+          <article class="skill-card">
+            <span class="skill-number">02</span>
             <h3>Robot learning</h3>
-            <p>Policies from limited demonstrations, tested for transfer.</p>
-            <p class="capability-proof"><a href="#seeker">Seeker</a> and <a href="#focuspool">FocusPool</a></p>
+            <p>Designing, training and evaluating visuomotor and VLA policies across simulation and hardware, with attention to data efficiency, robustness and generalisation.</p>
+            <div class="skill-tags"><span>Algorithm design</span><span>VLA fine-tuning</span><span>Imitation learning</span><span>Policy evaluation</span></div>
           </article>
-          <article class="capability">
-            <h3>Perception for action</h3>
-            <p>Visual features grounded in tasks and robot state.</p>
-            <p class="capability-proof"><a href="#palm">PALM</a> and <a href="#robot-centric-pooling">Robot-centric Pooling</a></p>
+          <article class="skill-card">
+            <span class="skill-number">03</span>
+            <h3>Multimodal perception</h3>
+            <p>Combining RGB, depth, event cameras, point clouds and proprioception with visual foundation models such as DINO and SAM.</p>
+            <div class="skill-tags"><span>DINO &amp; SAM</span><span>RGB &amp; depth</span><span>Event cameras</span><span>Point clouds</span><span>6D pose</span><span>Proprioception</span></div>
           </article>
-          <article class="capability">
-            <h3>Robot systems</h3>
-            <p>Sensing, control and deployment on physical hardware.</p>
-            <p class="capability-proof"><a href="#goferbot">GoferBot</a> and <a href="#cartman">Cartman</a></p>
+          <article class="skill-card">
+            <span class="skill-number">04</span>
+            <h3>Real-robot deployment</h3>
+            <p>Designing data collection and evaluation pipelines, deploying policies and analysing the gap between simulated results and physical behaviour.</p>
+            <div class="skill-tags"><span>Data collection</span><span>Manipulation</span><span>System integration</span><span>Failure analysis</span></div>
           </article>
         </div>
       </section>
@@ -539,11 +549,11 @@
       if (clock) clock.textContent = '· ' + new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date());
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealItems = document.querySelectorAll('.section-head, .project, .capability, .research-archive-item, .evidence-list article, .system-story, .publication, .hobby-card');
+      const revealItems = document.querySelectorAll('.section-head, .project, .skill-card, .research-archive-item, .evidence-list article, .system-story, .publication, .hobby-card');
       if (!reducedMotion && 'IntersectionObserver' in window) {
         revealItems.forEach((item, index) => {
           item.classList.add('reveal');
-          if (item.matches('.capability') && index % 2) item.classList.add('reveal-delay');
+          if (item.matches('.skill-card') && index % 2) item.classList.add('reveal-delay');
         });
         const revealObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
