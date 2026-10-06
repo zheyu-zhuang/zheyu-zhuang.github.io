@@ -87,21 +87,16 @@
         </button>
       </nav>
 
-      <section class="hero" id="top">
+      <section class="hero" id="about">
         <div class="hero-copy">
-          <p class="eyebrow">Zheyu Zhuang <span lang="zh-Hans">庄哲宇</span> <span aria-hidden="true">·</span> Roboticist</p>
+          <p class="eyebrow" id="top">Zheyu Zhuang <span lang="zh-Hans">庄哲宇</span></p>
           <div class="hero-portrait">
             <div class="portrait-frame">
               <img src="images/profile.jpg" alt="Portrait of Zheyu Zhuang" width="720" height="720">
             </div>
           </div>
           <h1>I make a handful of demonstrations <em>go a long way.</em></h1>
-          <p class="hero-intro">I build visuomotor policies that keep working when scenes, cameras and robots change. My research connects data-efficient learning with the perception, control and hardware needed to test it in the real world.</p>
-          <dl class="hero-facts" aria-label="Research profile">
-            <div><dt>Current</dt><dd>Postdoctoral researcher · KTH</dd></div>
-            <div><dt>Focus</dt><dd>Generalisation from less data</dd></div>
-            <div><dt>Systems</dt><dd>Simulation to real robots</dd></div>
-          </dl>
+          <p class="hero-bio">At the Australian National University, my PhD with Professor Robert Mahony explored visual robotic picking by combining learned perception with closed-loop control. Since 2023, I have been a postdoctoral researcher with Professor Danica Kragic at KTH, developing data-efficient visuomotor policies that transfer across scenes, viewpoints and robot embodiments.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#work">Explore work <span aria-hidden="true">↓</span></a>
             <a class="button" href="files/resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
@@ -115,15 +110,14 @@
         </div>
       </section>
 
-      <section class="section section--tint about-section" id="about">
+      <section class="section section--tint expertise-section" id="expertise">
         <div class="section-head">
-          <p class="section-index">01 / About</p>
+          <p class="section-index">01 / Skills</p>
           <div>
-            <h2>From robotic picking to generalisable policies.</h2>
-            <p class="section-lede">At the Australian National University, my PhD with Professor Robert Mahony explored visual robotic picking by combining learned perception with closed-loop control. Since 2023, I have been a postdoctoral researcher with Professor Danica Kragic at KTH, developing data-efficient visuomotor policies that transfer across scenes, viewpoints and robot embodiments.</p>
+            <h2>What I bring to the work.</h2>
           </div>
         </div>
-        <div class="capabilities" id="expertise" aria-label="Core skills">
+        <div class="capabilities" aria-label="Core skills">
           <article class="capability">
             <h3>Robot learning</h3>
             <p>Policies from limited demonstrations, tested for transfer.</p>
@@ -563,7 +557,7 @@
       const updateSectionLink = () => {
         const marker = window.scrollY + window.innerHeight * .32;
         const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-        // Seeded with null so the hero reads as no section rather than highlighting About.
+        // Seeded with null until the viewport reaches the first section.
         const active = atPageEnd ? observedSections[observedSections.length - 1] : observedSections.reduce((current, section) => section.offsetTop <= marker ? section : current, null);
         sectionLinks.forEach(link => {
           // aria-current needs a real value: an empty string counts as false to a screen reader.

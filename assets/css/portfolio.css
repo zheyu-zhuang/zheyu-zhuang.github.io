@@ -246,7 +246,7 @@ a { color: inherit; }
 
 /* Shared uppercase micro-label. One size, one weight, one tracking. */
 .eyebrow, .section-index, .project-meta,
-.system-story-meta, .evidence-list article > span, .hero-facts dt {
+.system-story-meta, .evidence-list article > span {
   font-size: var(--fs-label);
   font-weight: var(--fw-bold);
   line-height: var(--lh-normal);
@@ -301,6 +301,7 @@ a { color: inherit; }
   max-width: var(--shell); margin: 0 auto;
   padding: var(--section-pad) var(--pad-x);
   padding-top: clamp(var(--space-5), 2vw, var(--space-7));
+  padding-bottom: var(--space-4);
   display: grid; grid-template-columns: minmax(0, 1fr) 280px;
   column-gap: clamp(var(--space-6), 4vw, 4.5rem); row-gap: 0;
 }
@@ -313,22 +314,9 @@ a { color: inherit; }
   letter-spacing: var(--ls-h1); font-weight: var(--fw-semi);
 }
 .hero h1 em { color: var(--accent); font-style: normal; font-weight: inherit; }
-.hero-intro {
+.hero-bio {
   max-width: var(--measure); margin: var(--space-5) 0 0;
-  color: var(--muted); font-size: var(--fs-lede); line-height: var(--lh-relaxed);
-}
-.hero-facts {
-  margin: var(--space-6) 0 0; padding-top: var(--space-4);
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5);
-  align-items: start;
-  border-top: 1px solid var(--line);
-}
-.hero-facts div { min-width: 0; }
-.hero-facts dt { margin-bottom: var(--space-1); color: var(--accent); }
-.hero-facts dd {
-  margin: 0; color: var(--ink);
-  font-size: var(--fs-body); font-weight: var(--fw-medium); line-height: var(--lh-normal);
-  text-wrap: balance;
+  color: var(--ink-soft); font-size: var(--fs-body); line-height: var(--lh-relaxed);
 }
 .hero-actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); }
 .hero-actions a { text-decoration: none; }
@@ -354,7 +342,7 @@ a { color: inherit; }
 
 /* Spans well past the copy so every row of it stays in column one; the surplus
    rows are empty and, with no row gap, add no height. */
-.hero-portrait { grid-column: 2; grid-row: 1 / span 20; align-self: center; }
+.hero-portrait { grid-column: 2; grid-row: 1 / span 8; align-self: center; }
 .portrait-frame {
   overflow: hidden; border-radius: var(--r-lg);
   background: var(--photo-bg); box-shadow: var(--shadow-md);
@@ -396,14 +384,13 @@ a { color: inherit; }
   color: var(--muted); font-size: var(--fs-lede); line-height: var(--lh-relaxed);
 }
 .section--dark .section-lede { color: var(--invert-fg-soft); }
-.about-section { padding-block: var(--space-7); }
-.about-section .section-head { margin-bottom: 0; }
+.expertise-section { padding-block: var(--space-5) var(--space-6); }
+.expertise-section .section-head { margin-bottom: var(--space-3); }
 [id]:is(.project, .research-archive-item, .system-story) { scroll-margin-top: calc(var(--nav-h) + var(--space-4)); }
 .capabilities {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6);
-  margin-top: var(--space-6); padding-top: var(--space-5);
+  padding-top: var(--space-4);
   border-top: 1px solid var(--line);
-  scroll-margin-top: calc(var(--nav-h) + var(--space-4));
 }
 .capability h3 { margin: 0 0 var(--space-2); font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
 .capability p { margin: 0; color: var(--muted); font-size: var(--fs-body-s); line-height: var(--lh-normal); }
@@ -669,8 +656,7 @@ a { color: inherit; }
        the headline's first line rather than with its line box. */
     margin: .3rem 0 var(--space-4) var(--space-5);
   }
-  /* Keeps the rule above the facts from ever running under the photo. */
-  .hero-facts { clear: right; }
+  .hero-actions { clear: right; }
   .section-head { grid-template-columns: 1fr; gap: var(--space-4); align-items: start; }
   .capabilities { grid-template-columns: 1fr; gap: var(--space-4); }
   .capability + .capability { padding-top: var(--space-4); border-top: 1px solid var(--line); }
@@ -688,9 +674,6 @@ a { color: inherit; }
   /* Tighter here so the name reads as a label on the headline, not a line of
      its own, and so the photo starts higher alongside it. */
   .eyebrow { margin-bottom: var(--space-4); }
-  .hero-facts { grid-template-columns: 1fr; gap: var(--space-3); }
-  .hero-facts div { display: grid; grid-template-columns: 5rem 1fr; gap: var(--space-2); align-items: baseline; }
-  .hero-facts dt { margin: 0; }
   .hero-actions { align-items: flex-start; }
   .hero-profiles { width: 100%; }
   .hero-portrait { width: clamp(88px, 27vw, 116px); margin-left: var(--space-4); }
