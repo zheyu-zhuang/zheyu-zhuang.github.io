@@ -23,7 +23,7 @@
   --accent-soft: #e9eff7;   /* hover wash                                  */
   --on-accent:   #fdfcfa;   /* text on accent fills                        */
 
-  /* Inverted block - the Approach section. In light mode it drops to near
+  /* Inverted block - the Skills section. In light mode it drops to near
      black; in dark mode it lifts to a raised surface instead, because there
      is nothing left to invert to.                                         */
   --invert-bg:      #24221e;
@@ -368,7 +368,7 @@ a { color: inherit; }
 /* ---------------------------------------------------------------------------
    Section system
    Every section: a --rail index column + heading block, then a full-width body.
-   Blocks alternate page / tint down the page; Approach takes the dark
+   Blocks alternate page / tint down the page; Skills takes the dark
    treatment in its tinted slot. Tone alone separates them, so no rules.
 
    Full-bleed sections add --pad-x on top of the centring calc so their text
@@ -399,6 +399,9 @@ a { color: inherit; }
   color: var(--muted); font-size: var(--fs-lede); line-height: var(--lh-relaxed);
 }
 .section--dark .section-lede { color: var(--invert-fg-soft); }
+.about-section { padding-block: var(--space-7); }
+.about-section .section-head { margin-bottom: 0; }
+[id]:is(.project, .research-archive-item, .system-story) { scroll-margin-top: calc(var(--nav-h) + var(--space-4)); }
 
 .about-columns {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -525,14 +528,31 @@ a { color: inherit; }
   color: var(--muted); font-size: var(--fs-body-s); line-height: var(--lh-relaxed);
 }
 .project-summary strong { color: var(--ink); font-weight: var(--fw-semi); }
+.project-result {
+  max-width: var(--measure); margin: var(--space-3) 0 0;
+  color: var(--accent); font-size: var(--fs-small); font-weight: var(--fw-semi);
+}
 .project-links { display: flex; flex: 0 0 auto; gap: var(--space-4); margin: 0; }
 .project-links a { padding: var(--space-1) 0; color: var(--accent); font-size: var(--fs-small); font-weight: var(--fw-semi); text-decoration: none; }
 .project-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
+.research-archive { margin-top: var(--space-7); border-top: 1px solid var(--line); }
+.research-archive-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-5) 0; }
+.research-archive-head h3 { margin: 0; font-size: var(--fs-h3); font-weight: var(--fw-semi); letter-spacing: var(--ls-h2); }
+.research-archive-head span, .research-archive-item > span { color: var(--accent); font-size: var(--fs-small); }
+.research-archive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) var(--space-7); }
+.research-archive-item { padding: var(--space-4) 0; border-top: 1px solid var(--line); }
+.research-archive-item h4 { margin: var(--space-2) 0 0; font-size: var(--fs-h4); line-height: var(--lh-snug); }
+.research-archive-item p { max-width: var(--measure-narrow); margin: var(--space-2) 0; color: var(--muted); font-size: var(--fs-body-s); line-height: var(--lh-normal); }
+.research-archive-links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.research-archive-links a, .research-archive-links button { padding: var(--space-1) 0; border: 0; background: none; color: var(--accent); font: var(--fw-semi) var(--fs-small) / var(--lh-normal) var(--sans); text-decoration: none; cursor: pointer; }
+.research-archive-links a:hover, .research-archive-links button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.research-archive-links button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
 /* ---------------------------------------------------------------------------
-   Approach (dark)
+   Skills (dark)
    --------------------------------------------------------------------------- */
-.skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-7) var(--space-6); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-7) var(--space-6); }
 .skill-number { color: var(--invert-accent); }
 .skill-card h3 { margin: var(--space-3) 0 var(--space-2); font-size: var(--fs-h4); line-height: var(--lh-snug); font-weight: var(--fw-semi); }
 .skill-card p { margin: 0; color: var(--invert-fg-soft); font-size: var(--fs-body-s); line-height: var(--lh-relaxed); }
@@ -542,6 +562,9 @@ a { color: inherit; }
   background: var(--invert-line); color: var(--invert-fg-soft);
   font-size: var(--fs-micro); line-height: var(--lh-normal);
 }
+.skill-card .skill-proof { margin-top: var(--space-4); }
+.skill-proof a { color: var(--invert-accent); font-weight: var(--fw-semi); text-decoration: none; }
+.skill-proof a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------------------------------------------------------------------------
    Systems
@@ -700,6 +723,7 @@ a { color: inherit; }
   .project-meta { flex-direction: row; justify-content: space-between; }
   .project-media { width: 100%; max-width: none; }
   .project-title-row { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
+  .research-archive-grid { grid-template-columns: 1fr; gap: var(--space-2); }
   .skills-grid { grid-template-columns: 1fr; }
   .systems-stories { grid-template-columns: 1fr; gap: var(--space-6); }
   .site-footer { grid-template-columns: 1fr auto; }

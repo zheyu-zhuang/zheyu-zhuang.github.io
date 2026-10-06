@@ -75,9 +75,9 @@
     <main id="main">
       <nav class="signal-strip" aria-label="Page sections">
         <div class="signal-links">
+          <a href="#practice">Skills</a>
+          <a href="#work">Work</a>
           <a href="#about">About</a>
-          <a href="#work">Research</a>
-          <a href="#practice">Approach</a>
           <a href="#publications">Papers</a>
         </div>
         <button class="theme-toggle" type="button" aria-pressed="false">
@@ -96,14 +96,15 @@
             </div>
           </div>
           <h1>I make a handful of demonstrations <em>go a long way.</em></h1>
-          <p class="hero-intro">Behaviour cloning turns demonstrations into a policy, and that policy stays tied to the conditions it was trained under. Change the background, move the object, shift the camera, swap the arm, and it starts to fail. Those are usually treated as four different problems. I treat them as one, and use the structure a task already contains instead of more data.</p>
+          <p class="hero-intro">I build visuomotor policies that keep working when scenes, cameras and robots change. My research connects data-efficient learning with the perception, control and hardware needed to test it in the real world.</p>
           <dl class="hero-facts" aria-label="Research profile">
             <div><dt>Current</dt><dd>Postdoctoral researcher · KTH</dd></div>
             <div><dt>Focus</dt><dd>Generalisation from less data</dd></div>
             <div><dt>Systems</dt><dd>Simulation to real robots</dd></div>
           </dl>
           <div class="hero-actions">
-            <a class="button button-primary" href="files/resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="#work">Explore work <span aria-hidden="true">↓</span></a>
+            <a class="button" href="files/resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
             <div class="hero-profiles" aria-label="Professional profiles">
               <a href="https://github.com/Zheyu-Zhuang">GitHub</a>
               <a href="https://scholar.google.com/citations?hl=en&amp;user=zHFrndgAAAAJ">Scholar</a>
@@ -114,17 +115,36 @@
         </div>
       </section>
 
-      <section class="section section--tint about-section" id="about">
+      <section class="section section--dark skills-section" id="practice">
         <div class="section-head">
-          <p class="section-index">01 / About</p>
+          <p class="section-index">01 / Skills</p>
           <div>
-            <h2>Building embodied intelligence that generalises.</h2>
-            <p class="section-lede">I am a postdoctoral researcher in Robotics, Perception and Learning at KTH Royal Institute of Technology, working with Professor Danica Kragic. I received my PhD in Robotics from the Australian National University with Professor Robert Mahony.</p>
+            <h2>What I build.</h2>
+            <p class="section-lede">Three connected capabilities, developed through research and tested on physical robots.</p>
           </div>
         </div>
-        <div class="about-columns">
-            <p>My research asks how visuomotor policies can learn action-relevant representations that transfer across changes in visual appearance, spatial configuration, viewpoint and robot embodiment. By grounding perception in the task, interaction and the robot's own body, I aim to make policies more data-efficient and reliable beyond the conditions in which they were trained.</p>
-            <p>I approach embodied AI as an end-to-end robotics systems problem. My work spans simulation, real-robot data collection, multimodal sensing and calibration, ROS integration, policy learning, real-time control, evaluation and deployment. This systems perspective helps me connect policy design to physical constraints, diagnose failures across the pipeline, and investigate how embodied agents can learn from limited data and transfer across environments and robot platforms.</p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <span class="skill-number">01</span>
+            <h3>Robot learning</h3>
+            <p>Train policies from limited demonstrations and evaluate whether they transfer beyond the training setup.</p>
+            <div class="skill-tags"><span>Imitation learning</span><span>Policy evaluation</span><span>VLA fine-tuning</span></div>
+            <p class="skill-proof">In practice: <a href="#seeker">Seeker</a> and <a href="#focuspool">FocusPool</a></p>
+          </article>
+          <article class="skill-card">
+            <span class="skill-number">02</span>
+            <h3>Perception for action</h3>
+            <p>Connect visual features with task and robot state so policies attend to what matters for control.</p>
+            <div class="skill-tags"><span>RGB &amp; depth</span><span>Point clouds</span><span>Proprioception</span></div>
+            <p class="skill-proof">In practice: <a href="#palm">PALM</a> and <a href="#robot-centric-pooling">Robot-centric Pooling</a></p>
+          </article>
+          <article class="skill-card">
+            <span class="skill-number">03</span>
+            <h3>Complete robot systems</h3>
+            <p>Integrate sensing, calibration, ROS and real-time control, then deploy and diagnose the full system.</p>
+            <div class="skill-tags"><span>ROS</span><span>Sensor integration</span><span>Deployment</span></div>
+            <p class="skill-proof">In practice: <a href="#goferbot">GoferBot</a> and <a href="#cartman">Cartman</a></p>
+          </article>
         </div>
       </section>
 
@@ -132,12 +152,12 @@
         <div class="section-head">
           <p class="section-index">02 / Research</p>
           <div>
-            <h2>Perception becomes meaningful through action.</h2>
-            <p class="section-lede">A useful representation of the world is not necessarily a complete one. For a robot, meaning comes from what it can do, what it is trying to achieve and how it understands its own body. My research explores how these connections can be learned and how they can endure as the world changes.</p>
+            <h2>Selected research.</h2>
+            <p class="section-lede">Learning useful visual representations from actions and building policies that generalise across real-world changes.</p>
           </div>
         </div>
         <div class="projects">
-          <article class="project">
+          <article class="project" id="seeker">
             <div class="project-meta"><span>2026 · CoRL</span></div>
             <button class="project-media project-media-live project-media-square project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="seeker-media-dialog" aria-label="Open the Seeker animation at full size">
               <img src="images/seeker.gif" alt="Seeker regions of interest across two real-robot manipulation tasks" width="1080" height="608" loading="lazy" decoding="async">
@@ -152,11 +172,12 @@
                 </div>
               </div>
               <p class="project-highlight">Learns where to look directly from action supervision.</p>
-              <p class="project-summary">Seeker uses the task and robot state to produce <strong>task-aware regions of interest</strong>, without spatial labels. Instead of treating every pixel equally, it identifies the evidence needed for the next action. The learned attention supports <strong>RGB cropping, background augmentation and point-cloud filtering</strong> across changing scenes.</p>
+              <p class="project-summary">Task and robot state guide visual attention without spatial labels. The learned regions support RGB cropping, augmentation and point-cloud filtering.</p>
+              <p class="project-result">On real robots: 76.7% in-domain success vs 48.3% for the strongest baseline.</p>
             </div>
           </article>
 
-          <article class="project">
+          <article class="project" id="focuspool">
             <div class="project-meta"><span>2026 · CoRL</span></div>
             <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="focuspool-media-dialog" aria-label="Open the FocusPool figure at full size">
               <img src="images/focuspool-teaser.png" alt="FocusPool selects local visual features from intermediate CNN maps, compared with average pooling and spatial softmax" width="2710" height="1236" loading="lazy" decoding="async">
@@ -170,11 +191,11 @@
                 </div>
               </div>
               <p class="project-highlight">Finds control-relevant visual detail within intermediate CNN features.</p>
-              <p class="project-summary">FocusPool uses the robot's proprioceptive state to <strong>select and aggregate spatially local visual features</strong>. This lets a visuomotor policy focus on information relevant to the current action without manually defined image crops.</p>
+              <p class="project-summary">Proprioception selects local features within a CNN map, helping policies focus on action-relevant detail without manual image crops.</p>
             </div>
           </article>
 
-          <article class="project">
+          <article class="project" id="palm">
             <div class="project-meta"><span>2026 · RA-L</span></div>
             <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="palm-media-dialog" aria-label="Open the PALM teaser at full size">
               <img src="images/palm_teaser.png" alt="PALM perception alignment across workspace position, camera viewpoint, and robot embodiment" width="3566" height="3389" loading="lazy" decoding="async">
@@ -188,84 +209,42 @@
                 </div>
               </div>
               <p class="project-highlight">Generalises by aligning perception around the robot hand.</p>
-              <p class="project-summary">PALM focuses on <strong>local visual evidence around the robot hand</strong>, then connects it with proprioception. The representation stays meaningful across changes in <strong>workspace, camera viewpoint and robot embodiment</strong>, allowing fine manipulation skills to transfer without relearning the entire scene.</p>
+              <p class="project-summary">Local hand-centred perception and proprioception help manipulation skills transfer across workspaces, camera views and robot embodiments.</p>
             </div>
           </article>
 
-          <article class="project">
-            <div class="project-meta"><span>2025 · CoRL</span></div>
-            <button class="project-media project-media-live project-media-zoom project-media-mirrorduo" type="button" aria-haspopup="dialog" aria-controls="mirrorduo-media-dialog" aria-label="Open the MirrorDuo animation at full size">
-              <img src="images/mirrorduo.gif" alt="MirrorDuo reflection-consistent visuomotor learning across mirrored workspaces" width="1080" height="608" loading="lazy" decoding="async">
-              <span class="media-zoom-hint" aria-hidden="true">Zoom <b>↗</b></span>
-            </button>
-            <div class="project-copy">
-              <div class="project-title-row">
-                <h3 title="MirrorDuo: Reflection-Consistent Visuomotor Learning from Mirrored Demonstration Pairs">MirrorDuo: Reflection-Consistent Visuomotor Learning</h3>
-                <div class="project-links">
-                  <a href="https://proceedings.mlr.press/v305/zhuang25a.html">Paper <span aria-hidden="true">↗</span></a>
-                  <a href="https://github.com/zheyu-zhuang/mirror-duo">Code <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-              <p class="project-highlight">Transfers skills across space through consistent data mirroring.</p>
-              <p class="project-summary">MirrorDuo reflects <strong>images, proprioception and full 6 DoF actions</strong> as one consistent transformation. Each demonstration becomes a physically coherent paired example, enabling <strong>transfer to mirrored workspaces</strong> with little additional data.</p>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-meta"><span>2025 · ICRA</span></div>
-            <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="task-aware-media-dialog" aria-label="Open the task-aware visual encoder comparison at full size">
-              <img src="images/task_aware_2.png" alt="Comparison of encoder attention for reach-spam and reach-mug tasks, showing task-dependent attention in end-to-end trained visual encoders" width="1958" height="1184" loading="lazy" decoding="async">
-              <span class="media-zoom-hint" aria-hidden="true">Zoom <b>↗</b></span>
-            </button>
-            <div class="project-copy">
-              <div class="project-title-row">
-                <h3 title="Feature Extractor or Decision Maker: Rethinking the Role of Visual Encoders in Visuomotor Policies">Feature Extractor or Decision Maker? Rethinking Visual Encoders</h3>
-                <div class="project-links">
-                  <a href="https://arxiv.org/abs/2409.20248">Paper <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-              <p class="project-highlight">The same visual scene produces different representations when the task changes.</p>
-              <p class="project-summary">When trained end to end, the encoder absorbs the <strong>policy objective</strong> rather than behaving like a generic visual backbone. Even for similar images, motor supervision changes where it attends and which features it preserves. This reveals <strong>task aware visual representations</strong>.</p>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-meta"><span>2024 · CoRL</span></div>
-            <button class="project-media project-media-live project-media-square project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="robosaga-media-dialog" aria-label="Open the RoboSaGA animation at full size">
-              <img src="images/robosaga.gif" alt="RoboSaGA manipulation policies operating across varied visual backgrounds" width="1080" height="608" loading="lazy" decoding="async">
-              <span class="media-zoom-hint" aria-hidden="true">Zoom <b>↗</b></span>
-            </button>
-            <div class="project-copy">
-              <div class="project-title-row">
-                <h3 title="Enhancing Visual Domain Robustness in Behaviour Cloning via Saliency-Guided Augmentation">RoboSaGA: Saliency-Guided Augmentation for Visual Robustness</h3>
-                <div class="project-links">
-                  <a href="https://openreview.net/forum?id=CskuWHDBAr">Paper <span aria-hidden="true">↗</span></a>
-                  <a href="https://github.com/zheyu-zhuang/RoboSaGA">Code <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-              <p class="project-highlight">Builds visual robustness from the encoder’s own attention.</p>
-              <p class="project-summary">RoboSaGA uses <strong>policy saliency</strong> to locate and protect the visual evidence needed for control, while aggressively changing irrelevant appearance during training. This improves <strong>robustness to lighting, shadows, distractors, textures and backgrounds</strong> without manually defined masks.</p>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-meta"><span>2024 · IROS</span></div>
-            <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="rcp-media-dialog" aria-label="Open the Robot-centric Pooling figure at full size">
-              <img src="images/robot-centric-pooling.png" alt="Robot-centric Pooling comparison of image-proprioception alignment and saliency for the controlled robot, a self-distractor, and a baseline" width="1498" height="1132" loading="lazy" decoding="async">
-              <span class="media-zoom-hint" aria-hidden="true">Zoom <b>↗</b></span>
-            </button>
-            <div class="project-copy">
-              <div class="project-title-row">
-                <h3 title="Raising Body Ownership in End-to-End Visuomotor Policy Learning via Robot-Centric Pooling">Robot-Centric Pooling: Body Ownership in Visuomotor Policies</h3>
-                <div class="project-links">
-                  <a href="https://arxiv.org/abs/2411.04331">Paper <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-              <p class="project-highlight">Learns visual self identification in multi robot environments.</p>
-              <p class="project-summary">Robot-centric Pooling connects visual features with proprioception so a policy can <strong>recognise the body it controls</strong> among similar-looking robots. This robot-centred perception remains reliable around <strong>unseen embodiments, self-distractors and large pixel shifts</strong>.</p>
-            </div>
-          </article>
-
+        </div>
+        <div class="research-archive" aria-labelledby="more-research-heading">
+          <div class="research-archive-head">
+            <h3 id="more-research-heading">More research</h3>
+            <span>2024–2025</span>
+          </div>
+          <div class="research-archive-grid">
+            <article class="research-archive-item">
+              <span>2025 · CoRL</span>
+              <h4>MirrorDuo</h4>
+              <p>Mirrored demonstrations transfer skills across space with consistent images, state and 6 DoF actions.</p>
+              <div class="research-archive-links"><a href="https://proceedings.mlr.press/v305/zhuang25a.html">Paper ↗</a><a href="https://github.com/zheyu-zhuang/mirror-duo">Code ↗</a><button type="button" aria-haspopup="dialog" aria-controls="mirrorduo-media-dialog">View demo ↗</button></div>
+            </article>
+            <article class="research-archive-item">
+              <span>2025 · ICRA</span>
+              <h4>Task-aware visual encoders</h4>
+              <p>End-to-end motor supervision changes what a visual encoder attends to, even in the same scene.</p>
+              <div class="research-archive-links"><a href="https://arxiv.org/abs/2409.20248">Paper ↗</a><button type="button" aria-haspopup="dialog" aria-controls="task-aware-media-dialog">View figure ↗</button></div>
+            </article>
+            <article class="research-archive-item">
+              <span>2024 · CoRL</span>
+              <h4>RoboSaGA</h4>
+              <p>Policy saliency guides augmentation to make manipulation robust to visual distractions.</p>
+              <div class="research-archive-links"><a href="https://openreview.net/forum?id=CskuWHDBAr">Paper ↗</a><a href="https://github.com/zheyu-zhuang/RoboSaGA">Code ↗</a><button type="button" aria-haspopup="dialog" aria-controls="robosaga-media-dialog">View demo ↗</button></div>
+            </article>
+            <article class="research-archive-item" id="robot-centric-pooling">
+              <span>2024 · IROS</span>
+              <h4>Robot-centric Pooling</h4>
+              <p>Image–proprioception alignment helps a policy recognise the body it controls.</p>
+              <div class="research-archive-links"><a href="https://arxiv.org/abs/2411.04331">Paper ↗</a><button type="button" aria-haspopup="dialog" aria-controls="rcp-media-dialog">View figure ↗</button></div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -318,7 +297,7 @@
             </div>
             <button class="media-dialog-close" type="button" aria-label="Close enlarged RoboSaGA animation">Close <span aria-hidden="true">×</span></button>
           </div>
-          <img src="images/robosaga.gif" alt="Enlarged RoboSaGA manipulation policies operating across varied visual backgrounds" width="1080" height="608" decoding="async">
+          <img data-src="images/robosaga.gif" alt="Enlarged RoboSaGA manipulation policies operating across varied visual backgrounds" width="1080" height="608" decoding="async">
         </div>
       </dialog>
 
@@ -344,7 +323,7 @@
             </div>
             <button class="media-dialog-close" type="button" aria-label="Close enlarged MirrorDuo animation">Close <span aria-hidden="true">×</span></button>
           </div>
-          <img src="images/mirrorduo.gif" alt="Enlarged MirrorDuo reflection-consistent visuomotor learning animation" width="1080" height="608" decoding="async">
+          <img data-src="images/mirrorduo.gif" alt="Enlarged MirrorDuo reflection-consistent visuomotor learning animation" width="1080" height="608" decoding="async">
         </div>
       </dialog>
 
@@ -361,39 +340,13 @@
         </div>
       </dialog>
 
-      <section class="section section--dark skills-section" id="practice">
+      <section class="section section--tint about-section" id="about">
         <div class="section-head">
-          <p class="section-index">03 / Approach</p>
+          <p class="section-index">03 / About</p>
           <div>
-            <h2>A systems approach to robot learning.</h2>
-            <p class="section-lede">I build robot-learning pipelines end to end, from data collection and ROS-based sensor integration to algorithm design, evaluation and deployment on physical systems.</p>
+            <h2>Research grounded in real robots.</h2>
+            <p class="section-lede">I am a postdoctoral researcher in Robotics, Perception and Learning at KTH, working with Professor Danica Kragic. I earned my PhD in Robotics at the Australian National University with Professor Robert Mahony. My work connects data-efficient learning with real-robot deployment.</p>
           </div>
-        </div>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <span class="skill-number">01</span>
-            <h3>Robotics systems</h3>
-            <p>Integrating hardware and software through ROS, with multi-sensor synchronisation, communication, calibration, control and real-time execution.</p>
-            <div class="skill-tags"><span>ROS</span><span>Sensor synchronisation</span><span>System integration</span><span>Real-time control</span></div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-number">02</span>
-            <h3>Robot learning</h3>
-            <p>Designing, training and evaluating visuomotor and VLA policies across simulation and hardware, with attention to data efficiency, robustness and generalisation.</p>
-            <div class="skill-tags"><span>Algorithm design</span><span>VLA fine-tuning</span><span>Imitation learning</span><span>Policy evaluation</span></div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-number">03</span>
-            <h3>Multimodal perception</h3>
-            <p>Combining RGB, depth, event cameras, point clouds and proprioception with visual fundation models such as DINO and SAM.</p>
-            <div class="skill-tags"><span>DINO &amp; SAM</span><span>RGB &amp; depth</span><span>Event cameras</span><span>Point clouds</span><span>6D pose</span><span>Proprioception</span></div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-number">04</span>
-            <h3>Real-robot deployment</h3>
-            <p>Designing data collection and evaluation pipelines, deploying policies and analysing the gap between simulated results and physical behaviour.</p>
-            <div class="skill-tags"><span>Data collection</span><span>Manipulation</span><span>System integration</span><span>Failure analysis</span></div>
-          </article>
         </div>
       </section>
 
@@ -406,7 +359,7 @@
           </div>
         </div>
         <div class="systems-stories">
-          <article class="system-story">
+          <article class="system-story" id="goferbot">
             <div class="system-story-media system-story-media-wide">
               <img src="images/zhuang_iros_2022.png" alt="GoferBot collaborating with a person during furniture assembly" loading="lazy">
             </div>
@@ -417,7 +370,7 @@
               <a href="https://www.youtube.com/watch?v=Fo5XI5OJ4QQ">Watch GoferBot <span aria-hidden="true">↗</span></a>
             </div>
           </article>
-          <article class="system-story">
+          <article class="system-story" id="cartman">
             <div class="system-story-media system-story-media-pair">
               <img src="images/morrison2018cartman.jpg" alt="Cartman warehouse picking robot" loading="lazy">
               <img src="images/milan2018semantic.jpg" alt="Semantic segmentation of warehouse objects for the Cartman project" loading="lazy">
@@ -603,7 +556,7 @@
       if (clock) clock.textContent = '· ' + new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date());
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revealItems = document.querySelectorAll('.section-head, .project, .skill-card, .evidence-list article, .system-story, .publication, .about-columns, .hobby-card');
+      const revealItems = document.querySelectorAll('.section-head, .project, .skill-card, .research-archive-item, .evidence-list article, .system-story, .publication, .hobby-card');
       if (!reducedMotion && 'IntersectionObserver' in window) {
         revealItems.forEach((item, index) => {
           item.classList.add('reveal');
@@ -626,7 +579,7 @@
       const updateSectionLink = () => {
         const marker = window.scrollY + window.innerHeight * .32;
         const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-        // Seeded with null so the hero reads as no section rather than highlighting About.
+        // Seeded with null so the hero reads as no section rather than highlighting Skills.
         const active = atPageEnd ? observedSections[observedSections.length - 1] : observedSections.reduce((current, section) => section.offsetTop <= marker ? section : current, null);
         sectionLinks.forEach(link => {
           // aria-current needs a real value: an empty string counts as false to a screen reader.
@@ -647,11 +600,15 @@
       updateScrollState();
       window.addEventListener('scroll', requestScrollUpdate, { passive: true });
 
-      document.querySelectorAll('.project-media-zoom').forEach(mediaZoom => {
+      document.querySelectorAll('.project-media-zoom, .research-archive-links button').forEach(mediaZoom => {
         const mediaDialog = document.querySelector(`#${mediaZoom.getAttribute('aria-controls')}`);
         if (!mediaDialog) return;
         const closeMediaDialog = () => mediaDialog.close();
-        mediaZoom.addEventListener('click', () => mediaDialog.showModal());
+        mediaZoom.addEventListener('click', () => {
+          const deferredImage = mediaDialog.querySelector('img[data-src]');
+          if (deferredImage && !deferredImage.src) deferredImage.src = deferredImage.dataset.src;
+          mediaDialog.showModal();
+        });
         mediaDialog.querySelector('.media-dialog-close').addEventListener('click', closeMediaDialog);
         mediaDialog.addEventListener('click', event => {
           const bounds = mediaDialog.getBoundingClientRect();
