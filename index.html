@@ -157,6 +157,24 @@
           </article>
 
           <article class="project">
+            <div class="project-meta"><span>2026 · CoRL</span></div>
+            <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="focuspool-media-dialog" aria-label="Open the FocusPool figure at full size">
+              <img src="images/focuspool-teaser.png" alt="FocusPool selects local visual features from intermediate CNN maps, compared with average pooling and spatial softmax" width="2710" height="1236" loading="lazy" decoding="async">
+              <span class="media-zoom-hint" aria-hidden="true">Zoom <b>↗</b></span>
+            </button>
+            <div class="project-copy">
+              <div class="project-title-row">
+                <h3 title="Localized Visual Feature Aggregation via Focus Pooling for Visuomotor Policies">FocusPool: Localized Visual Feature Aggregation</h3>
+                <div class="project-links">
+                  <a href="https://arxiv.org/abs/2609.08408">Paper <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+              <p class="project-highlight">Finds control-relevant visual detail within intermediate CNN features.</p>
+              <p class="project-summary">FocusPool uses the robot's proprioceptive state to <strong>select and aggregate spatially local visual features</strong>. This lets a visuomotor policy focus on information relevant to the current action without manually defined image crops.</p>
+            </div>
+          </article>
+
+          <article class="project">
             <div class="project-meta"><span>2026 · RA-L</span></div>
             <button class="project-media project-media-live project-media-zoom" type="button" aria-haspopup="dialog" aria-controls="palm-media-dialog" aria-label="Open the PALM teaser at full size">
               <img src="images/palm_teaser.png" alt="PALM perception alignment across workspace position, camera viewpoint, and robot embodiment" width="3566" height="3389" loading="lazy" decoding="async">
@@ -261,6 +279,20 @@
             <button class="media-dialog-close" type="button" aria-label="Close enlarged Seeker animation">Close <span aria-hidden="true">×</span></button>
           </div>
           <img src="images/seeker.gif" alt="Enlarged Seeker regions of interest across two real-robot manipulation tasks" width="1080" height="608" decoding="async">
+        </div>
+      </dialog>
+
+      <dialog class="media-dialog" id="focuspool-media-dialog" aria-labelledby="focuspool-media-title">
+        <div class="media-dialog-shell">
+          <div class="media-dialog-head">
+            <div>
+              <strong id="focuspool-media-title">FocusPool</strong>
+              <span>Local visual features for policy learning</span>
+              <a href="images/focuspool-teaser.png" target="_blank" rel="noopener">Open full image ↗</a>
+            </div>
+            <button class="media-dialog-close" type="button" aria-label="Close enlarged FocusPool figure">Close <span aria-hidden="true">×</span></button>
+          </div>
+          <img src="images/focuspool-teaser.png" alt="Enlarged comparison of FocusPool, average pooling and spatial softmax using CNN feature maps" width="2710" height="1236" decoding="async">
         </div>
       </dialog>
 
