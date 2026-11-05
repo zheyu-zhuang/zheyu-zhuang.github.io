@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" id="theme-color" content="#faf7ef">
+    <meta name="theme-color" id="theme-color" content="#ffffff">
     <script>
       // Runs before first paint so a stored dark preference never flashes light.
       (function () {
@@ -11,7 +11,7 @@
         try { stored = localStorage.getItem('theme'); } catch (e) {}
         if (stored === 'dark' || stored === 'light') document.documentElement.dataset.theme = stored;
         var dark = stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-        document.getElementById('theme-color').content = dark ? '#172522' : '#faf7ef';
+        document.getElementById('theme-color').content = dark ? '#172522' : '#ffffff';
       })();
     </script>
     <title>Zheyu Zhuang | Roboticist</title>
@@ -319,6 +319,7 @@
   </div>
  </section>
  </div>
+ <div class="section-band mentoring-band">
  <section class="mentoring section section-band" id="mentoring" aria-labelledby="mentoring-title">
   <h2 id="mentoring-title">Mentoring &amp; service</h2>
   <div class="mentoring-content">
@@ -327,6 +328,7 @@
    <article><h3>Academic service</h3><p>Associate Editor for IROS 2025 and 2026 and ICRA 2027. Reviewer for IEEE RA-L, IEEE T-RO, RSS, CoRL, ICLR, ICRA and IROS.</p></article>
   </div>
  </section>
+ </div>
  <section class="outside section section-band" id="hobbies" aria-labelledby="hobbies-title">
   <div class="outside-intro">
    <h2 id="hobbies-title">Outside the lab</h2>
@@ -468,7 +470,9 @@
       </dialog>
 
 
+<div class="section-band contact-band">
 <footer class="contact section section-band" id="contact"><h2>Get in touch</h2><p>Robots, research, or a good question.</p><a class="contact-email" href="mailto:roboticist.zheyu@gmail.com">roboticist.zheyu<br>@gmail.com</a><div class="footer-bottom"><p>Stockholm, Sweden</p><nav aria-label="Professional profiles"><a href="https://scholar.google.com/citations?hl=en&amp;user=zHFrndgAAAAJ">Scholar</a><a href="https://github.com/Zheyu-Zhuang">GitHub</a><a href="https://www.linkedin.com/in/roboticist-zheyu">LinkedIn</a><a href="files/resume.pdf">CV</a></nav><a href="#top">Back to top ↑</a></div><p class="copyright">© 2026</p></footer>
+</div>
 <script src="assets/js/portfolio.js" defer></script>
 <script src="assets/js/attention-explorer.js" defer></script>
 <script src="assets/js/mirrorduo-animation.js" defer></script>

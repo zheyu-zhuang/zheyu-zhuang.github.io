@@ -2,7 +2,7 @@
 @font-face{font-family:'Hanken Grotesk';src:url('../fonts/hanken-semibold.ttf') format('truetype');font-weight:600;font-display:swap}
 
 /* Shared palette, reading grid and type hierarchy. */
-:root{--paper:#faf7ef;--ink:#24372f;--muted:#54635b;--body:#425147;--soft:#e8eddf;--accent:#ac3c25;--line:color-mix(in srgb,var(--ink) 18%,transparent);--content:1120px;--gutter:40px;--radius-surface:4px;--study-gap:64px;--section-space:64px;color-scheme:light}
+:root{--paper:#ffffff;--ink:#24372f;--muted:#54635b;--body:#425147;--soft:#e8eddf;--accent:#ac3c25;--line:color-mix(in srgb,var(--ink) 18%,transparent);--content:1120px;--gutter:40px;--radius-surface:4px;--study-gap:64px;--section-space:64px;color-scheme:light}
 :root[data-theme=dark]{--paper:#172522;--ink:#f6f2e5;--muted:#bcc8ba;--body:#d0d9cd;--soft:#25382f;--accent:#ffa185;color-scheme:dark}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#172522;--ink:#f6f2e5;--muted:#bcc8ba;--body:#d0d9cd;--soft:#25382f;--accent:#ffa185;color-scheme:dark}}
 *{box-sizing:border-box}
@@ -28,7 +28,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .skip-link:focus{top:12px}
 .section,.about-intro{width:100%;max-width:calc(var(--content) + var(--gutter)*2);margin-inline:auto;padding-inline:var(--gutter)}
 .section-band{width:100%}
-.work-band{background:var(--soft)}
+.work-band,.mentoring-band,.contact-band{background:var(--soft)}
 
 /* Navigation stays in one place and never changes height while reading. */
 .scroll-layer{translate:0 var(--scroll-shift,0px)}
@@ -257,7 +257,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 @media(max-width:600px){.mirror-demo{justify-self:start}}
 
 /* Complete systems have their own highlighted band and two project columns. */
-.systems-band{background:color-mix(in srgb,var(--accent) 8%,var(--paper));border-block:1px solid color-mix(in srgb,var(--accent) 16%,transparent)}
+.systems-band{background:var(--paper);border-block:1px solid var(--line)}
 .systems{padding-block:var(--section-space)}
 .systems-opening{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--study-gap);align-items:start;margin-bottom:40px}
 .systems-opening>p{max-width:52ch;color:var(--body)}
