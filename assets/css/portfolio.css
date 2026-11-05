@@ -256,18 +256,21 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .mirror-rollout svg{width:48px;height:12px;color:var(--accent)}
 @media(max-width:600px){.mirror-demo{justify-self:start}}
 
-/* Bibliography is depth on demand, not another set of feature panels. */
-.systems{padding-top:var(--section-space)}
-.systems-opening{display:grid;grid-template-columns:1fr 1.12fr;gap:var(--study-gap);align-items:start;margin-bottom:40px}
+/* Complete systems have their own highlighted band and two project columns. */
+.systems-band{background:color-mix(in srgb,var(--accent) 8%,var(--paper));border-block:1px solid color-mix(in srgb,var(--accent) 16%,transparent)}
+.systems{padding-block:var(--section-space)}
+.systems-opening{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--study-gap);align-items:start;margin-bottom:40px}
 .systems-opening>p{max-width:52ch;color:var(--body)}
-.systems-projects{display:grid;gap:48px}
-.system-project{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:var(--study-gap);align-items:center;scroll-margin-top:100px}
+.systems-projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--study-gap)}
+.system-project{display:flex;flex-direction:column;gap:24px;min-width:0;scroll-margin-top:100px}
 .system-project-copy>p:not(.study-topic){margin-top:16px;color:var(--body)}
-.system-project-media{min-width:0;width:100%;max-width:560px;justify-self:center}
-.system-project-media>img{width:100%;height:auto}
+.system-project-media{display:flex;align-items:center;justify-content:center;min-width:0;width:100%;height:clamp(190px,22vw,280px)}
+.system-project-media>img{width:100%;height:auto;max-height:100%;object-fit:contain}
 .system-project-pair{display:flex;justify-content:center;align-items:center;gap:24px}
 .system-project-pair>img{width:calc((100% - 24px)/2);max-width:200px}
 .system-project-pair>img:first-child{max-width:150px}
+
+/* Bibliography stays with the research, separate from the complete systems. */
 .publications{padding-block:var(--section-space)}
 .publications-details summary{display:flex;justify-content:space-between;align-items:center;gap:32px;padding-top:32px;border-top:1px solid var(--line);list-style:none;cursor:pointer}
 .publications-details summary::-webkit-details-marker{display:none}
@@ -344,11 +347,12 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .mentoring-content,.outdoor-gallery{gap:28px}
 }
 @media(max-width:800px){
- .systems-opening,.system-project{grid-template-columns:1fr;gap:24px}
+ .systems-opening,.systems-projects{grid-template-columns:1fr}
  .systems-opening{gap:16px;margin-bottom:32px}
  .systems-opening>p{max-width:64ch}
- .system-project-media{justify-self:start}
- .system-project-pair{justify-content:flex-start}
+ .systems-projects{gap:48px}
+ .system-project-media{height:auto;max-width:560px;justify-content:flex-start}
+ .system-project-pair{min-height:200px}
  .about-intro{grid-template-columns:1fr;gap:24px}
  .about-main{max-width:66ch}
  .about-copy{max-width:none}
