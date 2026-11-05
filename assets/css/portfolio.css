@@ -174,8 +174,10 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .seeker-play:hover,.attention-play:hover{color:var(--accent);text-decoration-color:currentColor}
 .case-visual{aspect-ratio:1;position:relative}
 .case-visual>img{width:100%;height:auto}
-.seeker-cloud-reveal{overflow:hidden}
-.seeker-cloud-after{transform:scale(var(--cloud-scale,.6));transform-origin:50% 58%}
+.seeker-cloud-frame{overflow:hidden}
+.seeker-cloud-frame>img{position:absolute;inset:0;height:100%;transform-origin:0 0}
+.seeker-cloud-after{opacity:0}
+.seeker-cloud-frame.is-animating>img{will-change:transform,opacity}
 .case-image-label{font-size:12px;line-height:1.5;color:var(--muted);margin-bottom:8px}
 .case-image-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .case-image-pair img{width:100%}
@@ -500,7 +502,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .seeker-pin-track[data-pin]>.seeker-pin-layout,.seeker-pin-track[data-pin] .seeker-scroll{position:static}
  .seeker-scroll{width:100%;max-width:none}
  .application-picker{display:none}
- .seeker-compact-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-bottom:12px}
+ .seeker-compact-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-bottom:12px}
  .seeker-compact-controls button{min-height:44px;border:0;padding:8px 3px;background:transparent;font-size:12px;line-height:1.3;color:var(--muted);text-underline-offset:6px}
  .seeker-compact-controls button[aria-pressed=true]{color:var(--accent);text-decoration:underline;text-decoration-thickness:2px;font-weight:600}
  .seeker-compact-controls button:hover{color:var(--accent)}

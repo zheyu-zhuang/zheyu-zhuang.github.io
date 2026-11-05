@@ -185,7 +185,7 @@
       <ul class="study-applications application-picker" aria-label="Seeker applications">
        <li><button type="button" data-seeker-case="0" aria-controls="seeker-scene-zoom"><strong>Zoom</strong><span>Crop images around what matters for action.</span></button></li>
        <li><button type="button" data-seeker-case="1" aria-controls="seeker-scene-augmentation"><strong>Background augmentation</strong><span>Guide visual changes during training with attention.</span></button></li>
-       <li><button type="button" data-seeker-case="3" aria-controls="seeker-scene-after"><strong>3D point filtering</strong><span>Keep task-relevant points from the scene.</span></button></li>
+       <li><button type="button" data-seeker-case="3" aria-controls="seeker-scene-cloud"><strong>3D point filtering</strong><span>Keep task-relevant points from the scene.</span></button></li>
       </ul>
       <div class="study-finding"><strong class="finding-value">3×</strong><div class="finding-copy"><strong>real-robot success</strong><p>60% versus 20% for the strongest baseline, averaged across lighting and background changes.</p></div></div>
       <nav class="study-links" aria-label="Seeker resources"><a href="https://arxiv.org/abs/2608.13422">Paper</a><a href="https://github.com/zheyu-zhuang/seeker">Code &amp; demos</a><button type="button" aria-haspopup="dialog" aria-controls="seeker-media-dialog">More examples</button></nav>
@@ -195,8 +195,7 @@
       <nav class="seeker-compact-controls" aria-label="Choose a Seeker example">
        <button type="button" data-seeker-case="0" aria-controls="seeker-scene-zoom">Zoom</button>
        <button type="button" data-seeker-case="1" aria-controls="seeker-scene-augmentation">Augment</button>
-       <button type="button" data-seeker-case="2" aria-controls="seeker-scene-before">3D before</button>
-       <button type="button" data-seeker-case="3" aria-controls="seeker-scene-after">3D after</button>
+       <button type="button" data-seeker-case="3" aria-controls="seeker-scene-cloud">3D filtering</button>
       </nav>
       <div class="seeker-stage">
        <section class="seeker-scene is-active" data-scene="0" id="seeker-scene-zoom" aria-label="Zoom: animated attention">
@@ -205,11 +204,14 @@
        <section class="seeker-scene" data-scene="1" id="seeker-scene-augmentation" aria-label="Background augmentation">
         <figure class="seeker-visual"><div class="case-visual case-augmentation"><div><p class="case-image-label">Attention-guided training images</p><img src="images/research-interactions/seeker-guided-augmentation.webp" width="1198" height="360" alt="Three attention-guided appearance augmentations" loading="lazy"></div><div><p class="case-image-label">New backgrounds at evaluation</p><div class="case-image-pair"><img src="images/research-interactions/seeker-eval-square.webp" width="256" height="256" alt="Square insertion on a cereal-patterned tabletop" loading="lazy"><img src="images/research-interactions/seeker-eval-stack.webp" width="256" height="256" alt="Block stacking on a leaf-patterned tabletop" loading="lazy"></div></div></div></figure>
        </section>
-       <section class="seeker-scene" data-scene="2" id="seeker-scene-before" aria-label="Points before Seeker filtering">
-        <figure class="seeker-visual"><div class="case-visual"><img src="images/research-interactions/seeker-cloud-workspace.webp" data-theme-light="images/research-interactions/seeker-cloud-workspace.webp" data-theme-dark="images/research-interactions/seeker-cloud-workspace-dark.webp" width="320" height="320" alt="Coffee-preparation point cloud before Seeker filtering" loading="lazy"></div><figcaption class="seeker-visual-caption">Before Seeker · manual workspace crop</figcaption></figure>
-       </section>
-       <section class="seeker-scene" data-scene="3" id="seeker-scene-after" aria-label="Points after Seeker filtering">
-        <figure class="seeker-visual"><div class="case-visual seeker-cloud-reveal"><img class="seeker-cloud-after" src="images/research-interactions/seeker-cloud-filtered.webp" data-theme-light="images/research-interactions/seeker-cloud-filtered.webp" data-theme-dark="images/research-interactions/seeker-cloud-filtered-dark.webp" width="320" height="320" alt="Seeker-selected cup and gripper points, enlarged for inspection" loading="lazy"></div><figcaption class="seeker-visual-caption">After Seeker · retained points enlarged for clarity</figcaption></figure>
+       <section class="seeker-scene" data-scene="2" id="seeker-scene-cloud" aria-label="3D point filtering: workspace and retained points">
+        <figure class="seeker-visual">
+         <div class="case-visual seeker-cloud-frame">
+          <img class="seeker-cloud-before" src="images/research-interactions/seeker-cloud-workspace.webp" data-theme-light="images/research-interactions/seeker-cloud-workspace.webp" data-theme-dark="images/research-interactions/seeker-cloud-workspace-dark.webp" width="320" height="320" alt="Coffee-preparation point cloud before Seeker filtering" loading="lazy">
+          <img class="seeker-cloud-after" src="images/research-interactions/seeker-cloud-filtered.webp" data-theme-light="images/research-interactions/seeker-cloud-filtered.webp" data-theme-dark="images/research-interactions/seeker-cloud-filtered-dark.webp" width="320" height="320" alt="Seeker-selected cup and gripper points, enlarged for clarity" loading="lazy">
+         </div>
+         <figcaption class="seeker-visual-caption"><span class="seeker-cloud-label">Before filtering · workspace crop</span><button type="button" class="seeker-cloud-replay attention-play" aria-label="Replay the 3D filtering zoom">Replay zoom</button></figcaption>
+        </figure>
        </section>
       </div>
      </div>
