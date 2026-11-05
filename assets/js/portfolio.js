@@ -4,7 +4,7 @@
     const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     themeButton.setAttribute('aria-pressed', String(dark));
     themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
-    document.querySelector('#theme-color').content = dark ? '#172522' : '#ffffff';
+    document.querySelector('#theme-color').content = dark ? '#172522' : '#faf7ef';
     document.querySelectorAll('img[data-theme-light]').forEach(img => {
       const source = dark ? img.dataset.themeDark : img.dataset.themeLight;
       // Keep unopened demo dialogs lazy when the colour theme changes.

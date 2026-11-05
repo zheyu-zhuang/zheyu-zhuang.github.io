@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" id="theme-color" content="#ffffff">
+    <meta name="theme-color" id="theme-color" content="#faf7ef">
     <script>
       // Runs before first paint so a stored dark preference never flashes light.
       (function () {
@@ -11,7 +11,7 @@
         try { stored = localStorage.getItem('theme'); } catch (e) {}
         if (stored === 'dark' || stored === 'light') document.documentElement.dataset.theme = stored;
         var dark = stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-        document.getElementById('theme-color').content = dark ? '#172522' : '#ffffff';
+        document.getElementById('theme-color').content = dark ? '#172522' : '#faf7ef';
       })();
     </script>
     <title>Zheyu Zhuang | Roboticist</title>
