@@ -21,6 +21,7 @@
   let goal = {...home}, position = {...home}, velocity = {x:0,y:0,angle:0};
   let frame = 0, previousTime = 0, visible = true, focusedLink = null;
   let previewTimer = 0, returnTimer = 0, welcomed = false;
+  let previewHint = null;
   let activeObject = null, rewarded = false;
   let rewardTimers = [];
 
@@ -61,15 +62,28 @@
     clearTimeout(previewTimer);
     clearTimeout(returnTimer);
     previewTimer = returnTimer = 0;
+    previewHint?.cancel();
+    previewHint = null;
   }
 
   function preview() {
     stopPreview();
     welcomed = true;
     if (reduced.matches || document.hidden || !visible) return;
-    // A small, curious lift suggests life without giving away the hidden props.
+    // The raised fingertips sit beside the cabinet's lower corner. Briefly show
+    // that real object, so the fading outline hints at a room worth exploring.
+    const cabinet = roomObjects.find(object => object.element.dataset.roomObject === 'cabinet');
+    const hint = cabinet.element.animate([
+      {opacity:0},
+      {opacity:.5,offset:.22},
+      {opacity:.5,offset:.45},
+      {opacity:0}
+    ], {duration:2400,easing:'ease-in-out'});
+    previewHint = hint;
+    hint.onfinish = () => { if (previewHint === hint) previewHint = null; };
     move({x:326,y:178,angle:-Math.PI/5});
-    returnTimer = setTimeout(() => rest(),1100);
+    // Let the outline finish fading while the arm settles back into its pose.
+    returnTimer = setTimeout(() => { returnTimer = 0; move({...home}); },1100);
   }
 
   function discover(point) {
