@@ -3,7 +3,7 @@
   function syncTheme() {
     const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     themeButton.setAttribute('aria-pressed', String(dark));
-    themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+    themeButton.setAttribute('aria-label', `Pull the lamp cord to switch to ${dark ? 'light' : 'dark'} theme`);
     document.querySelector('#theme-color').content = dark ? '#172522' : '#faf7ef';
     document.querySelectorAll('img[data-theme-light]').forEach(img => {
       const source = dark ? img.dataset.themeDark : img.dataset.themeLight;
@@ -16,6 +16,11 @@
     document.documentElement.dataset.theme = themeButton.getAttribute('aria-pressed') === 'true' ? 'light' : 'dark';
     try { localStorage.setItem('theme', document.documentElement.dataset.theme); } catch (_) {}
     syncTheme();
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const pull = themeButton.querySelector('.lamp-pull');
+      pull.getAnimations().forEach(animation => animation.cancel());
+      pull.animate([{transform:'scaleY(1.15)'},{transform:'scaleY(1)'}], {duration:350,easing:'cubic-bezier(.2,.8,.3,1)'});
+    }
   });
   syncTheme();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);

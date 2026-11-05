@@ -32,14 +32,22 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 
 /* Navigation stays in one place and never changes height while reading. */
 .scroll-layer{translate:0 var(--scroll-shift,0px)}
-.site-header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:24px;min-height:72px;padding:12px max(var(--gutter),calc((100% - var(--content))/2));background:var(--paper)}
+.site-header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:24px;min-height:72px;padding:12px max(var(--gutter),calc((100% - var(--content))/2));padding-left:max(56px,calc((100% - var(--content))/2));background:var(--paper)}
 .header-name{font-size:16px;font-weight:600;text-decoration:none;white-space:nowrap;margin-right:auto}
 .header-name span{font-size:16px;font-weight:600;margin-left:8px}
 .site-header nav{display:flex;align-items:center;gap:28px;font-size:14px}
 .site-header nav a{padding-block:10px;text-decoration:none}
 .site-header nav a:hover{text-decoration:underline}
-.theme-toggle{border:0;background:transparent;width:44px;height:44px;flex-shrink:0;font-size:23px;line-height:1}
-.theme-toggle:hover{color:var(--accent)}
+.theme-toggle{position:absolute;top:0;left:max(0px,calc((100% - var(--content))/4 - 22px));border:0;padding:0;background:transparent;width:44px;height:104px;line-height:1;color:var(--muted)}
+.theme-lamp{display:block;width:44px;height:104px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.lamp-shade{fill:var(--soft)}
+.lamp-bulb{fill:#edbe67;stroke:#bd8e42;filter:drop-shadow(0 3px 5px #e6b55780)}
+.theme-toggle[aria-pressed=true] .lamp-bulb{fill:var(--muted);stroke:var(--muted);filter:none;opacity:.45}
+.lamp-handle{fill:var(--accent);stroke:var(--accent)}
+.lamp-pull{transform-origin:35px 38px;transition:transform .18s ease-out}
+.theme-toggle:hover,.theme-toggle:focus-visible{color:var(--ink)}
+.theme-toggle:hover .lamp-pull{transform:scaleY(1.06)}
+.theme-toggle:active .lamp-pull{transform:scaleY(1.15)}
 
 /* The portrait belongs to the introduction; the arm has its own room. */
 .about-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:48px 80px}
@@ -381,9 +389,11 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 }
 @media(max-width:700px){
  html{scroll-padding-top:128px}
- .site-header{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:0 16px;padding-block:8px}
+ .site-header{display:grid;grid-template-columns:44px minmax(0,1fr);gap:0 16px;padding-block:0 8px;padding-inline:var(--gutter)}
+ .header-name{grid-column:2;grid-row:1}
  .site-header nav{grid-column:1/-1;grid-row:2;justify-content:space-between}
- .theme-toggle{grid-column:2;grid-row:1}
+ .theme-toggle{position:relative;left:auto;grid-column:1;grid-row:1;width:44px;height:64px;display:flex;justify-content:center;align-self:start}
+ .theme-lamp{width:28px;height:64px}
  .about-intro{grid-template-columns:1fr;gap:32px;padding-block:32px 56px}
  .about-main{max-width:66ch}
  .about-copy{max-width:none}
@@ -393,7 +403,6 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  h2{font-size:30px}
  .site-header{gap:0 12px}
  .site-header nav{justify-content:space-between;flex:1;gap:12px;font-size:13px}
- .theme-toggle{width:36px;height:44px;font-size:21px}
  .about-intro{padding-block:24px 48px}
  .about-identity{gap:16px}
  .about-identity h1{font-size:48px}
