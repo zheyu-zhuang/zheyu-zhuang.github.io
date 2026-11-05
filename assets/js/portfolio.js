@@ -1,12 +1,9 @@
 (() => {
-  const themeButtons = document.querySelectorAll('.theme-toggle,.room-lamp-control');
+  const themeButton = document.querySelector('.theme-toggle');
   function syncTheme() {
     const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    themeButtons.forEach(button => {
-      button.setAttribute('aria-pressed', String(dark));
-      button.setAttribute('aria-label', `${button.matches('.room-lamp-control') ? 'Let the robot pull the lamp cord to switch to' : 'Switch to'} ${dark ? 'light' : 'dark'} theme`);
-    });
-    document.querySelector('[data-room-object=lamp]').dataset.lit = String(!dark);
+    themeButton.setAttribute('aria-pressed', String(dark));
+    themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
     document.querySelector('#theme-color').content = dark ? '#172522' : '#faf7ef';
     document.querySelectorAll('img[data-theme-light]').forEach(img => {
       const source = dark ? img.dataset.themeDark : img.dataset.themeLight;
@@ -21,13 +18,7 @@
     try { localStorage.setItem('theme', document.documentElement.dataset.theme); } catch (_) {}
     syncTheme();
   }
-  themeButtons.forEach(button => button.addEventListener('click', () => {
-    // The room's switch waits for the robot's physical pull. The navigation
-    // switch and reduced-motion fallback stay immediate.
-    if (button.matches('.room-lamp-control') && !document.dispatchEvent(new Event('room-lamp-pull', {cancelable:true}))) return;
-    toggleTheme();
-  }));
-  document.addEventListener('room-lamp-toggle', toggleTheme);
+  themeButton.addEventListener('click', toggleTheme);
   syncTheme();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
   document.querySelectorAll('[aria-haspopup="dialog"]').forEach(button => {

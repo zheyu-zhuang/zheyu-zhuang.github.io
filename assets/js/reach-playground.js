@@ -25,20 +25,28 @@
   const difference = (a,b) => Math.atan2(Math.sin(a-b),Math.cos(a-b));
   let goal = {...home}, position = {...home}, velocity = {x:0,y:0,angle:0};
   let frame = 0, previousTime = 0, visible = true, focusedLink = null;
-  let previewTimer = 0, returnTimer = 0, welcomed = false;
-  let previewHint = null;
+  let previewTimer = 0, welcomed = false;
   let activeObject = null, rewarded = false;
   let rewardTimers = [];
   let lampPhase = '', lampGrip = false;
+  let roomLit = false, lampTargetLight = false, lampAutomatic = false;
+
+  function setRoomLight(on) {
+    roomLit = on;
+    room.dataset.lit = lamp.element.dataset.lit = String(on);
+    lampControl.setAttribute('aria-pressed', String(on));
+    lampControl.setAttribute('aria-label', `Turn ${on ? 'off' : 'on'} the room light`);
+  }
 
   function resetCord() {
-    lampCord.setAttribute('d','M128 70H145V132');
+    lampCord.setAttribute('d','M145 80V132');
     lampHandle.removeAttribute('transform');
   }
 
   function clearReward() {
     lampPhase = '';
     lampGrip = false;
+    lampAutomatic = false;
     resetCord();
     rewardTimers.forEach(clearTimeout);
     rewardTimers = [];
@@ -52,7 +60,7 @@
     rewarded = true;
     const name = activeObject.element.dataset.roomObject;
     if (name === 'lamp') {
-      // Hover offers the handle; only a deliberate click starts the pull.
+      // The welcome or a later click requests a pull after the fingers arrive.
       if (lampPhase === 'reaching') {
         lampGrip = true;
         lampPhase = 'pulling';
@@ -83,29 +91,38 @@
 
   function stopPreview() {
     clearTimeout(previewTimer);
-    clearTimeout(returnTimer);
-    previewTimer = returnTimer = 0;
-    previewHint?.cancel();
-    previewHint = null;
+    previewTimer = 0;
   }
 
   function preview() {
     stopPreview();
+    if (document.hidden || !visible) return;
+    pullLamp(true);
+  }
+
+  function scheduleWelcome() {
+    if (welcomed || previewTimer || document.hidden || !visible) return;
+    if (reduced.matches) {
+      welcomed = true;
+      setRoomLight(true);
+    } else previewTimer = setTimeout(preview,700);
+  }
+
+  function pullLamp(automatic = false) {
+    if (lampPhase) return;
+    stopPreview();
     welcomed = true;
-    if (reduced.matches || document.hidden || !visible) return;
-    // Greet the lamp's handle without pulling it. Its fading outline hints at
-    // the interaction waiting beside the fingertips.
-    const hint = lamp.element.animate([
-      {opacity:0},
-      {opacity:.5,offset:.22},
-      {opacity:.5,offset:.45},
-      {opacity:0}
-    ], {duration:2400,easing:'ease-in-out'});
-    previewHint = hint;
-    hint.onfinish = () => { if (previewHint === hint) previewHint = null; };
-    move({x:145,y:159,angle:-Math.PI/2});
-    // Let the outline finish fading while the arm settles back into its pose.
-    returnTimer = setTimeout(() => { returnTimer = 0; move({...home}); },1100);
+    if (reduced.matches || document.hidden || !visible) {
+      setRoomLight(automatic || !roomLit);
+      return;
+    }
+    focusedLink = null;
+    clearReward();
+    discover(lamp.target);
+    reach(lamp);
+    lampPhase = 'reaching';
+    lampTargetLight = automatic || !roomLit;
+    lampAutomatic = automatic;
   }
 
   function discover(point) {
@@ -147,7 +164,7 @@
     lamp.element.style.setProperty('--room-presence',Math.max(lamp.presence,hint).toFixed(3));
     if (lampGrip) {
       const drop = clamp(tip.y-132,0,24);
-      lampCord.setAttribute('d',`M128 70H145V${(132+drop).toFixed(2)}`);
+      lampCord.setAttribute('d',`M145 80V${(132+drop).toFixed(2)}`);
       lampHandle.setAttribute('transform',`translate(0 ${drop.toFixed(2)})`);
     }
   }
@@ -178,14 +195,14 @@
     const atGoal = Math.hypot(position.x-goal.x,position.y-goal.y)<(activeObject === lamp ? .5 : 2) && Math.abs(difference(position.angle,goal.angle))<.04;
     if (activeObject && !rewarded && atGoal) reward();
     else if (lampPhase === 'pulling' && atGoal) {
-      document.dispatchEvent(new Event('room-lamp-toggle'));
+      setRoomLight(lampTargetLight);
       lampPhase = 'returning';
       move({x:145,y:159,angle:-Math.PI/2});
     } else if (lampPhase === 'returning' && atGoal) {
       lampPhase = '';
       lampGrip = false;
       resetCord();
-      if (!room.matches(':hover') && document.activeElement !== lampControl) rest();
+      if (lampAutomatic || (!room.matches(':hover') && document.activeElement !== lampControl)) rest();
     }
   }
 
@@ -232,8 +249,10 @@
   }
 
   function rest(immediate = false) {
+    const retryWelcome = lampAutomatic && !roomLit;
     clearReward();
     stopPreview();
+    if (retryWelcome) welcomed = false;
     discover(null);
     goal = {...home};
     if (immediate || reduced.matches || document.hidden || !visible) {
@@ -245,10 +264,7 @@
   }
 
   intro.addEventListener('pointermove',event => {
-    if (event.pointerType !== 'mouse' || reduced.matches || !finePointer.matches || document.hidden || !visible || focusedLink || lampPhase) return;
-    // A visitor's first movement takes priority over the short arrival preview.
-    stopPreview();
-    welcomed = true;
+    if (event.pointerType !== 'mouse' || reduced.matches || !finePointer.matches || document.hidden || !visible || focusedLink || !welcomed || lampPhase) return;
     const link = event.target.closest('a');
     if (link) { discover(null); guide(link); }
     else {
@@ -259,26 +275,13 @@
     }
   }, {passive:true});
   room.addEventListener('pointerdown',event => {
-    if (event.pointerType === 'mouse' || reduced.matches || document.hidden || !visible || lampPhase || event.target.closest('button')) return;
-    stopPreview();
-    welcomed = true;
+    if (event.pointerType === 'mouse' || reduced.matches || document.hidden || !visible || !welcomed || lampPhase || event.target.closest('button')) return;
     const point = localPoint(event.clientX,event.clientY);
     const target = discover(point);
     if (target) reach(target);
     else attend(point);
   }, {passive:true});
-  document.addEventListener('room-lamp-pull',event => {
-    if (reduced.matches || document.hidden || !visible) return;
-    event.preventDefault();
-    if (lampPhase) return;
-    stopPreview();
-    welcomed = true;
-    focusedLink = null;
-    clearReward();
-    discover(lamp.target);
-    reach(lamp);
-    lampPhase = 'reaching';
-  });
+  lampControl.addEventListener('click',() => pullLamp());
   intro.addEventListener('click',event => {
     if (event.target.closest('a,button,input,textarea,select,summary,label') || lampPhase || reduced.matches || !finePointer.matches || !visible || document.hidden || window.getSelection()?.toString()) return;
     const tip = {x:position.x+27*Math.cos(position.angle),y:position.y+27*Math.sin(position.angle)};
@@ -286,11 +289,9 @@
     // A click there cues the same deliberate grip-and-pull interaction.
     if (Math.hypot(tip.x-145,tip.y-132)<42) lampControl.click();
   });
-  intro.addEventListener('pointerleave',() => { if (!focusedLink && !lampPhase) rest(); });
+  intro.addEventListener('pointerleave',() => { if (welcomed && !focusedLink && !lampPhase) rest(); });
   intro.addEventListener('focusin',event => {
-    stopPreview();
-    welcomed = true;
-    if (lampPhase) return;
+    if (!welcomed || lampPhase) return;
     if (event.target === lampControl) {
       discover(lamp.target);
       if (!reduced.matches && visible && !document.hidden) reach(lamp);
@@ -302,19 +303,18 @@
     focusedLink = link;
     if (!reduced.matches && visible && !document.hidden) guide(link);
   });
-  intro.addEventListener('focusout',() => { focusedLink = null; if (!lampPhase) rest(); });
+  intro.addEventListener('focusout',() => { focusedLink = null; if (welcomed && !lampPhase) rest(); });
   window.addEventListener('blur',() => rest(true));
-  window.addEventListener('resize',() => rest(true),{passive:true});
-  reduced.addEventListener('change',() => rest(true));
-  finePointer.addEventListener('change',() => rest(true));
-  document.addEventListener('visibilitychange',() => rest(true));
+  window.addEventListener('focus',scheduleWelcome);
+  const resetView = () => { rest(true); scheduleWelcome(); };
+  window.addEventListener('resize',resetView,{passive:true});
+  reduced.addEventListener('change',resetView);
+  finePointer.addEventListener('change',resetView);
+  document.addEventListener('visibilitychange',resetView);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     if (!visible) rest(true);
-    else if (!welcomed && !reduced.matches && finePointer.matches && !document.hidden) {
-      welcomed = true;
-      previewTimer = setTimeout(preview,700);
-    }
+    else scheduleWelcome();
   }).observe(demo);
 
   draw();

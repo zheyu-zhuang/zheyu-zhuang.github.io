@@ -94,17 +94,24 @@
    </div>
    <nav class="hero-actions about-links" aria-label="Professional links"><a class="cv-link" href="files/resume.pdf" aria-label="Curriculum vitae (PDF)"><span class="action-label">CV</span></a><a href="https://scholar.google.com/citations?hl=en&amp;user=zHFrndgAAAAJ"><span class="action-label">Google Scholar</span></a><a href="https://www.linkedin.com/in/roboticist-zheyu"><span class="action-label">LinkedIn</span></a><a href="mailto:roboticist.zheyu@gmail.com"><span class="action-label">Email</span></a></nav>
    </div>
-   <div class="about-room">
+   <div class="about-room" data-lit="false">
    <div class="reach-demo" id="reach-demo" aria-hidden="true">
     <div class="reach-stage">
      <svg class="reach-drawing" viewBox="0 20 500 400" aria-hidden="true" focusable="false">
+      <defs>
+       <radialGradient id="room-light-wash" gradientUnits="userSpaceOnUse" cx="124" cy="92" r="400">
+        <stop stop-color="#edbf6d" stop-opacity=".3"/><stop offset=".65" stop-color="#e6b75e" stop-opacity=".12"/><stop offset="1" stop-color="#e6b75e" stop-opacity="0"/>
+       </radialGradient>
+       <filter id="room-light-soften" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter>
+      </defs>
+      <path class="room-light-glow" d="M108 84L30 356Q238 420 472 356L140 84Z" fill="url(#room-light-wash)" filter="url(#room-light-soften)"/>
       <g class="reach-room">
-       <g class="reach-room-object" data-room-object="lamp" data-room-x="145" data-room-y="132" data-room-angle="-90">
+       <g class="reach-room-object" data-room-object="lamp" data-lit="false" data-room-x="145" data-room-y="132" data-room-angle="-90">
         <g data-room-body>
-         <path d="M105 28V54"/>
-         <circle class="room-lamp-bulb" cx="105" cy="82" r="7"/>
-         <path class="reach-room-leaf" d="M91 54H119L134 80H76Z"/>
-         <path class="room-lamp-cord" d="M128 70H145V132"/>
+         <path d="M124 28V54"/>
+         <circle class="room-lamp-bulb" cx="124" cy="82" r="7"/>
+         <path class="reach-room-leaf" d="M110 54H138L153 80H95Z"/>
+         <path class="room-lamp-cord" d="M145 80V132"/>
          <rect class="room-lamp-handle" x="141" y="126" width="8" height="12" rx="4"/>
         </g>
        </g>
@@ -155,7 +162,7 @@
      </svg>
     </div>
    </div>
-   <button class="room-lamp-control" type="button" aria-label="Let the robot pull the lamp cord to switch colour theme" aria-pressed="false"></button>
+   <button class="room-lamp-control" type="button" aria-label="Turn on the room light" aria-pressed="false"></button>
    </div>
   </section>
  </div>

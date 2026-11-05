@@ -81,7 +81,12 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .reach-tool{fill:none;stroke:var(--robot-ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .reach-tool-pin{fill:var(--robot-ink)}
 .reach-room{fill:none;stroke:var(--robot-ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.reach-room-object{opacity:.55;transition:opacity .2s ease-out}
+.reach-room-object{opacity:max(.55,var(--room-ambient,0));transition:opacity .7s ease-out}
+.about-room[data-lit=true]{--room-ambient:.65}
+.room-light-glow{opacity:0;transition:opacity .8s ease-out}
+.about-room[data-lit=true] .room-light-glow{opacity:1}
+[data-room-object=lamp]{--room-ambient:.22}
+.about-room[data-lit=true] [data-room-object=lamp]{--room-ambient:.85}
 .reach-room-surface{fill:var(--paper)}
 .room-lamp-control{position:absolute;left:14%;top:0;width:20%;height:34%;min-width:44px;min-height:44px;padding:0;border:0;background:transparent}
 .about-room:has(.room-lamp-control:focus-visible) [data-room-object=lamp]{opacity:.85}
@@ -120,7 +125,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 @keyframes reach-drip{0%{opacity:0;transform:translateY(0)}10%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translateY(49px)}}
 @keyframes reach-splash{0%,100%{opacity:0}20%,80%{opacity:.35}}
 @media(any-hover:hover) and (any-pointer:fine) and (prefers-reduced-motion:no-preference){
- .room-ready .reach-room-object{opacity:var(--room-presence,0)}
+ .room-ready .reach-room-object{opacity:max(var(--room-presence,0),var(--room-ambient,0))}
 }
 @media(prefers-reduced-motion:reduce){
  .reach-room-object,.reach-cabinet-door,.reach-cup,.reach-watering-can,.reach-leaves,.reach-bloom{transition:none!important}
