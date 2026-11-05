@@ -93,10 +93,9 @@
     stopPreview();
     welcomed = true;
     if (reduced.matches || document.hidden || !visible) return;
-    // The raised fingertips sit beside the cabinet's lower corner. Briefly show
-    // that real object, so the fading outline hints at a room worth exploring.
-    const cabinet = roomObjects.find(object => object.element.dataset.roomObject === 'cabinet');
-    const hint = cabinet.element.animate([
+    // Greet the lamp's handle without pulling it. Its fading outline hints at
+    // the interaction waiting beside the fingertips.
+    const hint = lamp.element.animate([
       {opacity:0},
       {opacity:.5,offset:.22},
       {opacity:.5,offset:.45},
@@ -104,7 +103,7 @@
     ], {duration:2400,easing:'ease-in-out'});
     previewHint = hint;
     hint.onfinish = () => { if (previewHint === hint) previewHint = null; };
-    move({x:326,y:178,angle:-Math.PI/5});
+    move({x:145,y:159,angle:-Math.PI/2});
     // Let the outline finish fading while the arm settles back into its pose.
     returnTimer = setTimeout(() => { returnTimer = 0; move({...home}); },1100);
   }
