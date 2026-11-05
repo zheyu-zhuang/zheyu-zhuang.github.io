@@ -1,0 +1,8 @@
+{
+  "focuspool": {
+    "source": "/Users/zheyu/Desktop/FocusPool_CoRL_2026/figs/real/activation_coffee_focuspool.png",
+    "frames": 6,
+    "description": "Recorded real-robot Coffee Transport attention overlays, left to right."
+  },
+  "processing": "Original pixels extracted into lossless WebP strips; no redrawing or generated attention."
+}

@@ -1,0 +1,48 @@
+{
+  "source": "images/palm_teaser.png",
+  "panels": {
+    "position": {
+      "scene": [
+        117,
+        228,
+        1201,
+        1307
+      ],
+      "local": [
+        338,
+        787,
+        614,
+        1067
+      ]
+    },
+    "viewpoint": {
+      "scene": [
+        1240,
+        226,
+        2324,
+        1305
+      ],
+      "local": [
+        1731,
+        866,
+        2018,
+        1153
+      ]
+    },
+    "robot": {
+      "scene": [
+        2361,
+        223,
+        3444,
+        1303
+      ],
+      "local": [
+        3011,
+        882,
+        3288,
+        1158
+      ]
+    }
+  },
+  "processing": "Setting panels downsampled, with full-resolution copies for scroll zoom; local views cropped directly inside existing green boxes. No synthetic alignment or redrawing."
+}

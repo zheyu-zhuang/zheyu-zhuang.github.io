@@ -1,0 +1,19 @@
+{
+  "source": "images/mirrorduo.gif",
+  "output": "mirrorduo-rollouts.mp4",
+  "original_setup_crop": [
+    134,
+    235,
+    508,
+    445
+  ],
+  "mirrored_setup_crop": [
+    581,
+    235,
+    955,
+    445
+  ],
+  "timing": "Original 539 frames at 40 ms per frame; source labels playback as 2\u00d7. Both panels encoded together to preserve synchronization.",
+  "processing": "Crop only; neither panel is synthetically reflected. Gap masked in CSS for both themes.",
+  "generator": "scripts/prepare-mirrorduo-animation.py"
+}

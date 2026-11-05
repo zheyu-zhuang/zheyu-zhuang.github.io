@@ -1,0 +1,6 @@
+{
+  "zoom": "coffee_temporal.pdf: first recorded scene (Im25) and corresponding ROI crop (Im3)",
+  "augmentation": "augmented_samples_and_eval_envs.pdf: guided third-person training examples and two evaluation environments",
+  "point_cloud": "seeker_pointcloud_crop.pdf: Coffee Preparation, workspace crop (Im10) and workspace + Seeker (Im9)",
+  "processing": "Extracted original images; point clouds trimmed and independently scaled as in the paper. White matte removed and neutral points adapted for dark mode. No generated content."
+}

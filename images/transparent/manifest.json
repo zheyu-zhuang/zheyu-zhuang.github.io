@@ -1,0 +1,128 @@
+[
+  {
+    "source": "focuspool-teaser.png",
+    "output": "focuspool-teaser.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 407530,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "focuspool-teaser.png",
+    "output": "focuspool-teaser-dark.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 408470,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "palm_teaser.png",
+    "output": "palm_teaser.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 4372598,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "palm_teaser.png",
+    "output": "palm_teaser-dark.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 4403423,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "task_aware_2.png",
+    "output": "task_aware_2.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 1789876,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "task_aware_2.png",
+    "output": "task_aware_2-dark.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 1790708,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "robot-centric-pooling.png",
+    "output": "robot-centric-pooling.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 809184,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "robot-centric-pooling.png",
+    "output": "robot-centric-pooling-dark.png",
+    "source_frames": 1,
+    "output_frames": 1,
+    "duration_ms": 0,
+    "bytes": 813836,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "seeker.gif",
+    "output": "seeker.webp",
+    "source_frames": 601,
+    "output_frames": 589,
+    "duration_ms": 24040,
+    "bytes": 11680186,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "seeker.gif",
+    "output": "seeker-dark.webp",
+    "source_frames": 601,
+    "output_frames": 589,
+    "duration_ms": 24040,
+    "bytes": 11704942,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "robosaga.gif",
+    "output": "robosaga.webp",
+    "source_frames": 449,
+    "output_frames": 426,
+    "duration_ms": 17960,
+    "bytes": 36168710,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "robosaga.gif",
+    "output": "robosaga-dark.webp",
+    "source_frames": 449,
+    "output_frames": 426,
+    "duration_ms": 17960,
+    "bytes": 36135938,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "mirrorduo.gif",
+    "output": "mirrorduo.webp",
+    "source_frames": 539,
+    "output_frames": 527,
+    "duration_ms": 21560,
+    "bytes": 37219124,
+    "protected_pixels_verified": true
+  },
+  {
+    "source": "mirrorduo.gif",
+    "output": "mirrorduo-dark.webp",
+    "source_frames": 539,
+    "output_frames": 527,
+    "duration_ms": 21560,
+    "bytes": 37198554,
+    "protected_pixels_verified": true
+  }
+]
