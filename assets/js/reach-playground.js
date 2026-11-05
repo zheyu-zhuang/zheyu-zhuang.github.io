@@ -10,9 +10,14 @@
   const finePointer = matchMedia('(any-hover: hover) and (any-pointer: fine)');
   const roomObjects = [...svg.querySelectorAll('[data-room-object]')].map(element => ({
     element,
+    presence: 0,
     bounds: element.querySelector('[data-room-body]').getBBox(),
     target: {x:Number(element.dataset.roomX),y:Number(element.dataset.roomY),angle:Number(element.dataset.roomAngle)*Math.PI/180}
   }));
+  const lamp = roomObjects.find(object => object.element.dataset.roomObject === 'lamp');
+  const lampControl = room.querySelector('.room-lamp-control');
+  const lampCord = lamp.element.querySelector('.room-lamp-cord');
+  const lampHandle = lamp.element.querySelector('.room-lamp-handle');
   const base = {x:240, y:340};
   const home = {x:310, y:204, angle:Math.PI*.6};
   const upper = 125, lower = 115;
@@ -24,8 +29,17 @@
   let previewHint = null;
   let activeObject = null, rewarded = false;
   let rewardTimers = [];
+  let lampPhase = '', lampGrip = false;
+
+  function resetCord() {
+    lampCord.setAttribute('d','M128 70H145V132');
+    lampHandle.removeAttribute('transform');
+  }
 
   function clearReward() {
+    lampPhase = '';
+    lampGrip = false;
+    resetCord();
     rewardTimers.forEach(clearTimeout);
     rewardTimers = [];
     activeObject?.element.classList.remove('is-rewarded','is-pouring');
@@ -36,8 +50,17 @@
 
   function reward() {
     rewarded = true;
-    activeObject.element.classList.add('is-rewarded');
     const name = activeObject.element.dataset.roomObject;
+    if (name === 'lamp') {
+      // Hover offers the handle; only a deliberate click starts the pull.
+      if (lampPhase === 'reaching') {
+        lampGrip = true;
+        lampPhase = 'pulling';
+        move({x:145,y:183,angle:-Math.PI/2});
+      }
+      return;
+    }
+    activeObject.element.classList.add('is-rewarded');
     if (name === 'plant') {
       demo.classList.add('is-watering');
       // Grip first, tip the whole wrist, then pour vertically from the lowered spout.
@@ -95,6 +118,7 @@
         Math.max(box.y-point.y,0,point.y-box.y-box.height)
       ) : Infinity;
       const presence = clamp(1-distance/90,0,1);
+      object.presence = presence*.85;
       object.element.style.setProperty('--room-presence',(presence*.85).toFixed(3));
       if (presence > .35 && distance < nearestDistance) {
         nearest = object;
@@ -117,6 +141,16 @@
       parts[name].setAttribute('cy',elbow.y.toFixed(2));
     }
     parts.hand.setAttribute('transform',`translate(${position.x.toFixed(2)} ${position.y.toFixed(2)}) rotate(${(position.angle*180/Math.PI).toFixed(2)})`);
+    // A cursor over the introduction can point the hand toward the upper-left
+    // corner even outside the drawing. Let the nearby cord reveal there too.
+    const tip = {x:position.x+27*Math.cos(position.angle),y:position.y+27*Math.sin(position.angle)};
+    const hint = clamp(1-Math.hypot(tip.x-145,tip.y-132)/75,0,1)*.85;
+    lamp.element.style.setProperty('--room-presence',Math.max(lamp.presence,hint).toFixed(3));
+    if (lampGrip) {
+      const drop = clamp(tip.y-132,0,24);
+      lampCord.setAttribute('d',`M128 70H145V${(132+drop).toFixed(2)}`);
+      lampHandle.setAttribute('transform',`translate(0 ${drop.toFixed(2)})`);
+    }
   }
 
   function tick(time) {
@@ -142,7 +176,18 @@
       previousTime = 0;
     } else frame = requestAnimationFrame(tick);
     draw();
-    if (activeObject && !rewarded && Math.hypot(position.x-goal.x,position.y-goal.y)<2 && Math.abs(difference(position.angle,goal.angle))<.04) reward();
+    const atGoal = Math.hypot(position.x-goal.x,position.y-goal.y)<(activeObject === lamp ? .5 : 2) && Math.abs(difference(position.angle,goal.angle))<.04;
+    if (activeObject && !rewarded && atGoal) reward();
+    else if (lampPhase === 'pulling' && atGoal) {
+      document.dispatchEvent(new Event('room-lamp-toggle'));
+      lampPhase = 'returning';
+      move({x:145,y:159,angle:-Math.PI/2});
+    } else if (lampPhase === 'returning' && atGoal) {
+      lampPhase = '';
+      lampGrip = false;
+      resetCord();
+      if (!room.matches(':hover') && document.activeElement !== lampControl) rest();
+    }
   }
 
   function move(next) {
@@ -201,7 +246,7 @@
   }
 
   intro.addEventListener('pointermove',event => {
-    if (event.pointerType !== 'mouse' || reduced.matches || !finePointer.matches || document.hidden || !visible || focusedLink) return;
+    if (event.pointerType !== 'mouse' || reduced.matches || !finePointer.matches || document.hidden || !visible || focusedLink || lampPhase) return;
     // A visitor's first movement takes priority over the short arrival preview.
     stopPreview();
     welcomed = true;
@@ -215,7 +260,7 @@
     }
   }, {passive:true});
   room.addEventListener('pointerdown',event => {
-    if (event.pointerType === 'mouse' || reduced.matches || document.hidden || !visible || event.target.closest('button')) return;
+    if (event.pointerType === 'mouse' || reduced.matches || document.hidden || !visible || lampPhase || event.target.closest('button')) return;
     stopPreview();
     welcomed = true;
     const point = localPoint(event.clientX,event.clientY);
@@ -223,17 +268,42 @@
     if (target) reach(target);
     else attend(point);
   }, {passive:true});
-  intro.addEventListener('pointerleave',() => { if (!focusedLink) rest(); });
+  document.addEventListener('room-lamp-pull',event => {
+    if (reduced.matches || document.hidden || !visible) return;
+    event.preventDefault();
+    if (lampPhase) return;
+    stopPreview();
+    welcomed = true;
+    focusedLink = null;
+    clearReward();
+    discover(lamp.target);
+    reach(lamp);
+    lampPhase = 'reaching';
+  });
+  intro.addEventListener('click',event => {
+    if (event.target.closest('a,button,input,textarea,select,summary,label') || lampPhase || reduced.matches || !finePointer.matches || !visible || document.hidden || window.getSelection()?.toString()) return;
+    const tip = {x:position.x+27*Math.cos(position.angle),y:position.y+27*Math.sin(position.angle)};
+    // The cursor may be over the text while the hand is beside the cord.
+    // A click there cues the same deliberate grip-and-pull interaction.
+    if (Math.hypot(tip.x-145,tip.y-132)<42) lampControl.click();
+  });
+  intro.addEventListener('pointerleave',() => { if (!focusedLink && !lampPhase) rest(); });
   intro.addEventListener('focusin',event => {
     stopPreview();
     welcomed = true;
+    if (lampPhase) return;
+    if (event.target === lampControl) {
+      discover(lamp.target);
+      if (!reduced.matches && visible && !document.hidden) reach(lamp);
+      return;
+    }
     const link = event.target.closest('a');
     if (!link) return;
     discover(null);
     focusedLink = link;
     if (!reduced.matches && visible && !document.hidden) guide(link);
   });
-  intro.addEventListener('focusout',() => { focusedLink = null; rest(); });
+  intro.addEventListener('focusout',() => { focusedLink = null; if (!lampPhase) rest(); });
   window.addEventListener('blur',() => rest(true));
   window.addEventListener('resize',() => rest(true),{passive:true});
   reduced.addEventListener('change',() => rest(true));

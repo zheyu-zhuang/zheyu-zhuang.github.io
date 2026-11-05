@@ -1,9 +1,12 @@
 (() => {
-  const themeButton = document.querySelector('.theme-toggle');
+  const themeButtons = document.querySelectorAll('.theme-toggle,.room-lamp-control');
   function syncTheme() {
     const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    themeButton.setAttribute('aria-pressed', String(dark));
-    themeButton.setAttribute('aria-label', `Pull the lamp cord to switch to ${dark ? 'light' : 'dark'} theme`);
+    themeButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', `${button.matches('.room-lamp-control') ? 'Let the robot pull the lamp cord to switch to' : 'Switch to'} ${dark ? 'light' : 'dark'} theme`);
+    });
+    document.querySelector('[data-room-object=lamp]').dataset.lit = String(!dark);
     document.querySelector('#theme-color').content = dark ? '#172522' : '#faf7ef';
     document.querySelectorAll('img[data-theme-light]').forEach(img => {
       const source = dark ? img.dataset.themeDark : img.dataset.themeLight;
@@ -12,16 +15,19 @@
       else if (img.getAttribute('src') !== source) img.src = source;
     });
   }
-  themeButton.addEventListener('click', () => {
-    document.documentElement.dataset.theme = themeButton.getAttribute('aria-pressed') === 'true' ? 'light' : 'dark';
+  function toggleTheme() {
+    const dark = document.querySelector('.theme-toggle').getAttribute('aria-pressed') === 'true';
+    document.documentElement.dataset.theme = dark ? 'light' : 'dark';
     try { localStorage.setItem('theme', document.documentElement.dataset.theme); } catch (_) {}
     syncTheme();
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const pull = themeButton.querySelector('.lamp-pull');
-      pull.getAnimations().forEach(animation => animation.cancel());
-      pull.animate([{transform:'scaleY(1.15)'},{transform:'scaleY(1)'}], {duration:350,easing:'cubic-bezier(.2,.8,.3,1)'});
-    }
-  });
+  }
+  themeButtons.forEach(button => button.addEventListener('click', () => {
+    // The room's switch waits for the robot's physical pull. The navigation
+    // switch and reduced-motion fallback stay immediate.
+    if (button.matches('.room-lamp-control') && !document.dispatchEvent(new Event('room-lamp-pull', {cancelable:true}))) return;
+    toggleTheme();
+  }));
+  document.addEventListener('room-lamp-toggle', toggleTheme);
   syncTheme();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
   document.querySelectorAll('[aria-haspopup="dialog"]').forEach(button => {

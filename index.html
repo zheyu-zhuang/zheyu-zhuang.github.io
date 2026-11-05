@@ -73,17 +73,10 @@
   <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
- <button class="theme-toggle" type="button" aria-label="Switch colour theme" aria-pressed="false">
-  <svg class="theme-lamp" viewBox="0 0 44 104" aria-hidden="true" focusable="false">
-   <path class="lamp-wire" d="M22 0V21"/>
-   <circle class="lamp-bulb" cx="22" cy="39" r="5"/>
-   <path class="lamp-shade" d="M13 21H31L40 38H4Z"/>
-   <g class="lamp-pull"><path class="lamp-cord" d="M35 38V84"/><rect class="lamp-handle" x="32" y="84" width="6" height="12" rx="3"/></g>
-  </svg>
- </button>
  <a class="header-name" href="#about" aria-label="Zheyu Zhuang 庄哲宇 — Back to introduction">Zheyu Zhuang <span lang="zh-Hans">庄哲宇</span></a>
 
  <nav aria-label="Main navigation"><a href="#about">About</a><a href="#work">Research</a><a href="#publications">Publications</a><a href="#contact">Contact</a></nav>
+ <button class="theme-toggle" type="button" aria-label="Switch colour theme" aria-pressed="false"><span aria-hidden="true">◐</span></button>
 </header>
 <main id="main">
  <div class="section-band intro-band">
@@ -106,6 +99,15 @@
     <div class="reach-stage">
      <svg class="reach-drawing" viewBox="0 20 500 400" aria-hidden="true" focusable="false">
       <g class="reach-room">
+       <g class="reach-room-object" data-room-object="lamp" data-room-x="145" data-room-y="132" data-room-angle="-90">
+        <g data-room-body>
+         <path d="M105 28V54"/>
+         <circle class="room-lamp-bulb" cx="105" cy="82" r="7"/>
+         <path class="reach-room-leaf" d="M91 54H119L134 80H76Z"/>
+         <path class="room-lamp-cord" d="M128 70H145V132"/>
+         <rect class="room-lamp-handle" x="141" y="126" width="8" height="12" rx="4"/>
+        </g>
+       </g>
        <g class="reach-room-object" data-room-object="cabinet" data-room-x="266" data-room-y="122" data-room-angle="-90">
         <g data-room-body>
          <rect class="reach-cabinet-back" x="208" y="80" width="144" height="76" rx="4"/>
@@ -153,6 +155,7 @@
      </svg>
     </div>
    </div>
+   <button class="room-lamp-control" type="button" aria-label="Let the robot pull the lamp cord to switch colour theme" aria-pressed="false"></button>
    </div>
   </section>
  </div>
