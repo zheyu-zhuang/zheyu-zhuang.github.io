@@ -274,7 +274,15 @@
       else attend(point);
     }
   }, {passive:true});
+  let touchStart = null;
   room.addEventListener('pointerdown',event => {
+    if (event.pointerType !== 'mouse') touchStart = {id:event.pointerId,x:event.clientX,y:event.clientY};
+  }, {passive:true});
+  room.addEventListener('pointercancel',() => { touchStart = null; }, {passive:true});
+  room.addEventListener('pointerup',event => {
+    const start = touchStart;
+    touchStart = null;
+    if (!start || start.id !== event.pointerId || Math.hypot(event.clientX-start.x,event.clientY-start.y)>10) return;
     if (event.pointerType === 'mouse' || reduced.matches || document.hidden || !visible || !welcomed || lampPhase || event.target.closest('button')) return;
     const point = localPoint(event.clientX,event.clientY);
     const target = discover(point);
@@ -307,7 +315,14 @@
   window.addEventListener('blur',() => rest(true));
   window.addEventListener('focus',scheduleWelcome);
   const resetView = () => { rest(true); scheduleWelcome(); };
-  window.addEventListener('resize',resetView,{passive:true});
+  // Mobile browser bars change viewport height during a swipe; the room's
+  // geometry only changes with its width. Keep the welcome steady while scrolling.
+  let viewportWidth = innerWidth;
+  window.addEventListener('resize',() => {
+    if (innerWidth === viewportWidth) return;
+    viewportWidth = innerWidth;
+    resetView();
+  },{passive:true});
   reduced.addEventListener('change',resetView);
   finePointer.addEventListener('change',resetView);
   document.addEventListener('visibilitychange',resetView);

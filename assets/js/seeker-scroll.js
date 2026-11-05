@@ -9,9 +9,10 @@
   const choices = [...document.querySelectorAll('[data-seeker-case]')];
   const video = viewer.querySelector('video');
   const button = viewer.querySelector('.seeker-play');
+  const desktop = matchMedia('(min-width:1101px) and (hover:hover) and (pointer:fine)');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0, current = -1, manual = 0, top = 96, travel = 1, anchor = track;
-  let enabled = false, userPaused = false, pending = false;
+  let enabled = false, playChoice = null, pending = false;
   const clamp = value => Math.max(0, Math.min(1, value));
   function select(index) {
     if (index === current) return;
@@ -22,10 +23,10 @@
       scene.setAttribute('aria-hidden', String(i !== index));
       scene.inert = i !== index;
     });
-    choices.forEach(choice => choice.setAttribute('aria-pressed', String(Number(choice.dataset.seekerCase) === (index === 2 ? 3 : index))));
+    choices.forEach(choice => choice.setAttribute('aria-pressed', String(Number(choice.dataset.seekerCase) === (index === 2 && choice.closest('.application-picker') ? 3 : index))));
   }
   function playback(visible) {
-    if (!visible || motion.matches || userPaused || document.hidden) video.pause();
+    if (!visible || !(playChoice ?? (!motion.matches && desktop.matches)) || document.hidden || document.querySelector('dialog[open]')) video.pause();
     else if (video.paused && !pending) {
       pending = true;
       video.play().catch(() => {}).finally(() => { pending = false; });
@@ -50,8 +51,8 @@
     const available = innerHeight - top - 16;
     const layoutHeight = layout.getBoundingClientRect().height;
     const viewerHeight = viewer.getBoundingClientRect().height;
-    enabled = !motion.matches && innerHeight >= 560 && viewerHeight <= available;
-    button.hidden = motion.matches;
+    enabled = desktop.matches && !motion.matches && innerHeight >= 560 && viewerHeight <= available;
+    button.hidden = false;
     if (enabled) {
       const wholeBlock = innerWidth > 800 && layoutHeight <= available;
       anchor = wholeBlock ? track : visualTrack;
@@ -73,13 +74,15 @@
     } else update();
   }));
   button.addEventListener('click', () => {
-    userPaused = !video.paused;
-    if (userPaused) video.pause(); else playback(true);
+    playChoice = video.paused;
+    if (!playChoice) video.pause(); else playback(true);
   });
   const label = () => { button.textContent = video.paused ? 'Play animation' : 'Pause animation'; };
   video.addEventListener('play', label);
   video.addEventListener('pause', label);
   motion.addEventListener('change', configure);
+  desktop.addEventListener('change', configure);
+  document.addEventListener('media-dialog-change', schedule);
   window.addEventListener('scroll', schedule, {passive:true});
   window.addEventListener('resize', configure);
   window.addEventListener('pageshow', configure);

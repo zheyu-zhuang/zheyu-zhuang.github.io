@@ -8,6 +8,7 @@
     const [x,y,width,height,sceneWidth,sceneHeight] = panel.dataset.palmCrop.split(',').map(Number);
     return {image:panel.querySelector('img'),x,y,width,height,sceneWidth,sceneHeight};
   });
+  const desktop = matchMedia('(min-width:1101px) and (hover:hover) and (pointer:fine)');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const clamp = value => Math.max(0,Math.min(1,value));
   let enabled = false, frame = 0, start = 0, end = 0;
@@ -31,12 +32,12 @@
     heading.textContent = closeup ? 'Similar views near the gripper' : 'Different settings';
   }
 
-  function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+  function schedule() { if (enabled && !frame) frame = requestAnimationFrame(update); }
 
   function configure() {
     const top = Math.ceil(document.querySelector('.site-header').getBoundingClientRect().height)+16;
     const available = innerHeight-top-16;
-    enabled = !motion.matches && innerHeight>=560;
+    enabled = desktop.matches && !motion.matches && innerHeight>=560;
     viewer.classList.toggle('is-zooming',enabled);
     if (viewer.getBoundingClientRect().height>available) {
       enabled = false;
@@ -52,6 +53,7 @@
   window.addEventListener('resize',configure);
   window.addEventListener('pageshow',configure);
   motion.addEventListener('change',configure);
+  desktop.addEventListener('change',configure);
   document.fonts.ready.then(configure);
   configure();
 })();

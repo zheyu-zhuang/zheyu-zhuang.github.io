@@ -1,5 +1,6 @@
 // Figures move on a slightly slower plane than the text; content stays visible.
 (() => {
+  const desktop = matchMedia('(min-width:1101px) and (hover:hover) and (pointer:fine)');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const layers = [...document.querySelectorAll('.about-play, .study-media:not(.palm-comparison), .related-preview')].map(element => {
     element.classList.add('scroll-layer');
@@ -14,7 +15,7 @@
 
   function updateLayers() {
     frame = 0;
-    if (motion.matches) return;
+    if (motion.matches || !desktop.matches) return;
     const scale = innerWidth <= 700 ? .55 : 1;
     // Read all geometry before writing styles; subtract our own offset to avoid feedback.
     const shifts = layers.map(layer => {
@@ -29,7 +30,7 @@
     });
   }
   function schedule() {
-    if (!motion.matches && !frame && !document.hidden) frame = requestAnimationFrame(updateLayers);
+    if (desktop.matches && !motion.matches && !frame && !document.hidden) frame = requestAnimationFrame(updateLayers);
   }
   function configure() {
     observer?.disconnect();
@@ -37,7 +38,7 @@
     animations.clear();
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
-    if (motion.matches) {
+    if (motion.matches || !desktop.matches) {
       layers.forEach(layer => {
         layer.shift = 0;
         layer.element.style.removeProperty('--scroll-shift');
@@ -47,7 +48,7 @@
     schedule();
     if (!('IntersectionObserver' in window)) return;
     observer = new IntersectionObserver(entries => {
-      if (motion.matches) return;
+      if (motion.matches || !desktop.matches) return;
       entries.forEach(({ target, isIntersecting, boundingClientRect }) => {
         if (!isIntersecting || seen.has(target)) return;
         seen.add(target);
@@ -73,5 +74,6 @@
   document.addEventListener('visibilitychange', schedule);
   if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(document.body);
   motion.addEventListener('change', configure);
+  desktop.addEventListener('change', configure);
   configure();
 })();

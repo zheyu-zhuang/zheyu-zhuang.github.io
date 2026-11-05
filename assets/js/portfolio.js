@@ -1,4 +1,9 @@
 (() => {
+  const compact = matchMedia('(max-width:1100px), (hover:none) and (pointer:coarse)');
+  const biography = document.querySelector('.about-more');
+  const syncBiography = () => { biography.open = !compact.matches; };
+  compact.addEventListener('change', syncBiography);
+  syncBiography();
   const themeButton = document.querySelector('.theme-toggle');
   function syncTheme() {
     const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;

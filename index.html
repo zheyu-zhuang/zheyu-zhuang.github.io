@@ -89,8 +89,10 @@
    <div class="about-copy">
     <p class="about-takeaway">Robots that adapt.<br><span>And understand the task.</span></p>
     <p class="about-lead">I study how robots learn efficiently, adapt to new situations, and follow human intent through language.</p>
+    <details class="about-more" open><summary>More about my work</summary><div>
     <p class="about-practice">My work connects perception, imitation learning and real robots. I’m interested in how they understand long, multi-step tasks: what matters now, what comes next, and when to change course.</p>
     <p class="about-background" id="background">I work with Professor Danica Kragic at KTH. My PhD with Professor Robert Mahony at ANU focused on learning-based visual control.</p>
+    </div></details>
    </div>
    <nav class="hero-actions about-links" aria-label="Professional links"><a class="cv-link" href="files/resume.pdf" aria-label="Curriculum vitae (PDF)"><span class="action-label">CV</span></a><a href="https://scholar.google.com/citations?hl=en&amp;user=zHFrndgAAAAJ"><span class="action-label">Google Scholar</span></a><a href="https://www.linkedin.com/in/roboticist-zheyu"><span class="action-label">LinkedIn</span></a><a href="mailto:roboticist.zheyu@gmail.com"><span class="action-label">Email</span></a></nav>
    </div>
@@ -179,7 +181,7 @@
       <p class="study-citation">Seeker <span>CoRL 2026</span></p>
      </header>
      <div class="study-details">
-      <p>Actions reveal what matters to a task. Seeker learns attention through <strong>action prediction alone</strong>, without spatial labels. Once learned, the same attention can be reused for zoom, background augmentation and 3D point filtering.</p>
+      <p>Seeker learns where to look through <strong>action prediction alone</strong>, without spatial labels. The same attention guides zoom, background augmentation and 3D point filtering.</p>
       <ul class="study-applications application-picker" aria-label="Seeker applications">
        <li><button type="button" data-seeker-case="0" aria-controls="seeker-scene-zoom"><strong>Zoom</strong><span>Crop images around what matters for action.</span></button></li>
        <li><button type="button" data-seeker-case="1" aria-controls="seeker-scene-augmentation"><strong>Background augmentation</strong><span>Guide visual changes during training with attention.</span></button></li>
@@ -190,6 +192,12 @@
      </div>
      <div class="seeker-view-track">
      <div class="seeker-scroll" data-seeker-scroll>
+      <nav class="seeker-compact-controls" aria-label="Choose a Seeker example">
+       <button type="button" data-seeker-case="0" aria-controls="seeker-scene-zoom">Zoom</button>
+       <button type="button" data-seeker-case="1" aria-controls="seeker-scene-augmentation">Augment</button>
+       <button type="button" data-seeker-case="2" aria-controls="seeker-scene-before">3D before</button>
+       <button type="button" data-seeker-case="3" aria-controls="seeker-scene-after">3D after</button>
+      </nav>
       <div class="seeker-stage">
        <section class="seeker-scene is-active" data-scene="0" id="seeker-scene-zoom" aria-label="Zoom: animated attention">
         <figure class="seeker-visual"><video class="seeker-zoom-video" src="images/research-interactions/seeker-zoom.mp4" poster="images/research-interactions/seeker-zoom-poster.webp" muted loop playsinline preload="none" aria-label="Recorded Seeker regions and attention masks across a coffee-preparation task"></video><figcaption class="seeker-visual-caption"><span>Predicted regions &amp; masks · two camera views</span><button type="button" class="seeker-play" hidden>Play animation</button></figcaption></figure>
