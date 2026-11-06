@@ -42,7 +42,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .theme-toggle:hover{color:var(--accent)}
 
 /* The portrait belongs to the introduction; the arm has its own room. */
-.about-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:48px 80px}
+.about-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px 64px;align-items:center;padding-block:48px 80px}
 .about-main,.about-room{min-width:0}
 .about-identity{display:flex;align-items:center;gap:20px}
 .about-greeting{font-size:15px;line-height:1.4;color:var(--accent);margin-bottom:4px}
@@ -54,7 +54,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
 .about-takeaway>span{color:var(--accent)}
 .about-lead{font-size:18px;line-height:1.55;margin-top:20px}
 .about-practice,.about-background{font-size:15px;line-height:1.65;color:var(--body);margin-top:16px}
-.about-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:20px;font-size:14px}
+.about-links{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:0 24px;margin:0;font-size:14px}
 .about-links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
 .about-links a:hover{text-decoration:underline}
 .about-room{position:relative;width:100%;max-width:500px;justify-self:center}
@@ -464,7 +464,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .site-header{position:relative}
  .site-header nav a{display:inline-flex;align-items:center;min-height:44px}
  .scroll-layer{translate:none}
- .about-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"identity room" "message room" "lead room" "links room" "bio bio";gap:20px 28px;align-items:center;padding-block:32px 48px}
+ .about-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"identity room" "message room" "lead room" "bio bio" "links links";gap:20px 28px;align-items:center;padding-block:32px 48px}
  .about-main,.about-copy{display:contents}
  .about-identity{grid-area:identity;gap:16px}
  .about-portrait{width:72px}
@@ -534,7 +534,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .about-links a,.study-links a,.study-links button,.footer-bottom a{min-height:44px;min-width:44px}
 }
 @media(max-width:600px){
- .about-intro{grid-template-columns:1fr;grid-template-areas:"identity" "message" "lead" "room" "links" "bio";gap:16px;padding-block:24px 36px}
+ .about-intro{grid-template-columns:1fr;grid-template-areas:"identity" "message" "lead" "room" "bio" "links";gap:16px;padding-block:24px 36px}
  .about-identity{gap:16px}
  .about-portrait{width:64px}
  .about-identity h1{font-size:44px}
