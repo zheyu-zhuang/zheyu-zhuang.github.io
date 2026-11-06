@@ -1,6 +1,5 @@
 // Recorded comparisons share a video so their rollout timing stays synchronized.
 (() => {
-  const desktop = matchMedia('(min-width:1101px) and (hover:hover) and (pointer:fine)');
   document.querySelectorAll('[data-mirror-demo], [data-recorded-demo]').forEach(demo => {
     const name = demo.dataset.demoName || 'MirrorDuo animation';
     const video = demo.querySelector('video');
@@ -8,7 +7,7 @@
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let visible = false, choice = null;
     function sync() {
-      const enabled = choice ?? (!motion.matches && desktop.matches);
+      const enabled = choice ?? !motion.matches;
       button.textContent = enabled ? 'Pause animation' : 'Play animation';
       button.setAttribute('aria-label', `${enabled ? 'Pause' : 'Play'} ${name}`);
       if (enabled && visible && !document.hidden && !document.querySelector('dialog[open]')) {
@@ -23,10 +22,9 @@
       } else video.pause();
     }
     button.addEventListener('click', () => {
-      choice = !(choice ?? (!motion.matches && desktop.matches));
+      choice = !(choice ?? !motion.matches);
       sync();
     });
-    desktop.addEventListener('change', sync);
     motion.addEventListener('change', () => { choice = null; sync(); });
     document.addEventListener('visibilitychange', sync);
     document.addEventListener('media-dialog-change', sync);

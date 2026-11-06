@@ -81,7 +81,7 @@
     choices.forEach(choice => choice.setAttribute('aria-pressed', String(Number(choice.dataset.seekerCase) === (index>=2 ? 3 : index))));
   }
   function playback(visible) {
-    if (!visible || !(playChoice ?? (!motion.matches && desktop.matches)) || document.hidden || document.querySelector('dialog[open]')) video.pause();
+    if (!visible || !(playChoice ?? !motion.matches) || document.hidden || document.querySelector('dialog[open]')) video.pause();
     else if (video.paused && !pending) {
       pending = true;
       video.play().catch(() => {}).finally(() => { pending = false; });
