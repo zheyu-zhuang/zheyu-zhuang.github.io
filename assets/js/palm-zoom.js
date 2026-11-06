@@ -8,7 +8,6 @@
     const [x,y,width,height,sceneWidth,sceneHeight] = panel.dataset.palmCrop.split(',').map(Number);
     return {image:panel.querySelector('img'),x,y,width,height,sceneWidth,sceneHeight};
   });
-  const desktop = matchMedia('(min-width:1101px) and (hover:hover) and (pointer:fine)');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const clamp = value => Math.max(0,Math.min(1,value));
   let enabled = false, frame = 0, start = 0, end = 0;
@@ -35,17 +34,24 @@
   function schedule() { if (enabled && !frame) frame = requestAnimationFrame(update); }
 
   function configure() {
-    const top = Math.ceil(document.querySelector('.site-header').getBoundingClientRect().height)+16;
+    const header = document.querySelector('.site-header');
+    const fixedHeader = ['sticky','fixed'].includes(getComputedStyle(header).position);
+    const top = fixedHeader ? Math.ceil(header.getBoundingClientRect().height)+16 : 16;
     const available = innerHeight-top-16;
-    enabled = desktop.matches && !motion.matches && innerHeight>=560;
+    enabled = !motion.matches;
     viewer.classList.toggle('is-zooming',enabled);
     if (viewer.getBoundingClientRect().height>available) {
       enabled = false;
       viewer.classList.remove('is-zooming');
     }
-    // Keep the entire zoom in the reading area, before the images approach the header.
-    start = innerHeight*.5;
-    end = Math.max(top+24,innerHeight*.3);
+    // Start once all three views are readable, and complete the zoom while they
+    // remain on screen. This uses normal scroll on phones, tablets and desktop.
+    start = Math.min(innerHeight*.65,innerHeight-scenes.getBoundingClientRect().height-24);
+    end = Math.max(top+24,innerHeight*.28);
+    if (start<=end) {
+      enabled = false;
+      viewer.classList.remove('is-zooming');
+    }
     update();
   }
 
@@ -53,7 +59,6 @@
   window.addEventListener('resize',configure);
   window.addEventListener('pageshow',configure);
   motion.addEventListener('change',configure);
-  desktop.addEventListener('change',configure);
   document.fonts.ready.then(configure);
   configure();
 })();
