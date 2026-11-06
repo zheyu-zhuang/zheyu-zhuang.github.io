@@ -456,7 +456,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .outdoor-gallery img{width:96px}
 }
 /* Touch layouts use ordinary document flow, short introductions and direct demos. */
-.about-more{min-width:0;max-width:64ch}
+.about-more{min-width:0}
 .seeker-compact-controls{display:none}
 @media(max-width:1100px), (hover:none) and (pointer:coarse){
  :root{--gutter:clamp(20px,4vw,32px);--study-gap:32px;--section-space:48px}
@@ -464,17 +464,17 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .site-header{position:relative}
  .site-header nav a{display:inline-flex;align-items:center;min-height:44px}
  .scroll-layer{translate:none}
- .about-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"identity room" "message room" "lead room" "bio bio" "links links";gap:20px 28px;align-items:center;padding-block:32px 48px}
- .about-main,.about-copy{display:contents}
- .about-identity{grid-area:identity;gap:16px}
+ .about-intro{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"main room" "links links";gap:24px 32px;align-items:center;padding-block:32px 48px}
+ .about-main{grid-area:main;max-width:none}
+ .about-copy{margin-top:24px}
+ .about-identity{gap:16px}
  .about-portrait{width:72px}
  .about-identity h1{font-size:48px}
  .about-position{font-size:12px}
- .about-takeaway{grid-area:message;font-size:30px}
- .about-lead{grid-area:lead;margin:0;font-size:17px;line-height:1.55}
+ .about-takeaway{font-size:30px}
+ .about-lead{margin-top:20px;font-size:17px;line-height:1.65}
  .about-room{grid-area:room;max-width:340px;touch-action:pan-y pinch-zoom}
  .about-links{grid-area:links;margin:0;gap:0 20px}
- .about-more{grid-area:bio;margin-top:0}
  .research-opening,.systems-opening{grid-template-columns:1fr;gap:12px;margin-bottom:32px}
  .research-opening>p,.systems-opening>p{max-width:60ch}
  .research-study,.seeker-pin-layout,.palm-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto;gap:20px 32px;align-items:start;scroll-margin-top:24px}
@@ -533,17 +533,23 @@ button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var
  .media-dialog-close{min-width:44px}
  .about-links a,.study-links a,.study-links button,.footer-bottom a{min-height:44px;min-width:44px}
 }
+/* Keep the introduction together before the illustration on smaller screens. */
+@media(max-width:800px){
+ .about-intro{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "room" "links";gap:24px}
+ .about-main{max-width:66ch}
+ .about-room{max-width:320px}
+}
 @media(max-width:600px){
- .about-intro{grid-template-columns:1fr;grid-template-areas:"identity" "message" "lead" "room" "bio" "links";gap:16px;padding-block:24px 36px}
+ .about-intro{gap:20px;padding-block:24px 36px}
  .about-identity{gap:16px}
  .about-portrait{width:64px}
  .about-identity h1{font-size:44px}
  .about-position{margin-top:6px}
  .about-takeaway{font-size:29px}
- .about-lead{font-size:16px}
- .about-room{max-width:280px;margin-block:0}
+ .about-lead,.about-practice,.about-background{font-size:16px;line-height:1.65}
+ .about-practice,.about-background{margin-top:14px}
+ .about-room{max-width:240px;margin-block:0}
  .about-links{justify-content:space-between;gap:0 12px;font-size:13px}
- .about-more{margin-top:-8px}
  .research-opening h2,.systems-opening h2{font-size:29px}
  .research-opening{margin-bottom:28px}
  .research-studies{gap:48px}
